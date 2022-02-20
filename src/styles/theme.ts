@@ -27,4 +27,7 @@ export default {
     small: '2.0rem',
     medium: '7.2rem',
   },
+  containers: {
+    mobile: '34.8rem', //428px - 80 = 348px
+  },
 }
