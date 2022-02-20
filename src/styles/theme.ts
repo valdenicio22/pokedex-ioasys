@@ -4,9 +4,11 @@ export default {
   },
   font: {
     family: 'Poppins, sans-serif',
-    light: 400,
-    semiBold: 500,
-    bold: 700,
+    weight: {
+      light: 400,
+      semiBold: 500,
+      bold: 700,
+    },
     sizes: {
       xsmall: '1.2rem', // 12px
       small: '1.4rem',
