@@ -1,33 +1,29 @@
 import { useState, useEffect } from 'react'
-import { api } from '../../service/api'
+import { api, getPokemonsData } from '../../service/api'
 import { PokeCard } from '../PokeCard/PokeCard'
 import * as S from './PokeList.styles'
 
 //Types
-import { PokeInfo, PokeCardData } from '../../types/types'
+import { PokeInfo } from '../../types/types'
 
 export const PokeList = () => {
-  const [pokeCardsData, setPokeCardsData] = useState<PokeCardData[]>([])
+  const [pokemons, setPokemons] = useState<PokeInfo[]>([])
   const [pokeNames, setPokeNames] = useState([''])
 
   useEffect(() => {
     try {
-      const pokesData = async () => {
-        const pokeList = await api.get('pokemon?limit=20&offset=0')
-        const { data: pokeListData } = pokeList
-        const pokeListInfo = pokeListData
-        console.log(pokeListData)
-      }
-
-      pokesData()
+      getPokemonsData().then((pokemonsResult) => setPokemons(pokemonsResult))
     } catch (error) {
       console.log(error)
     }
   }, [])
 
+  console.log(pokemons)
   return (
     <S.ListContainer>
-      {/* {pokeCardsData.map((card) => console.log(card))} */}
+      {pokemons.map((pokemon) => (
+        <PokeCard pokemon={pokemon} key={pokemon.id} />
+      ))}
     </S.ListContainer>
   )
 }

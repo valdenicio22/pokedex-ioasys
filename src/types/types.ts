@@ -1,9 +1,26 @@
+import { pokemonTypeColor } from '../utils/pokemons'
+
+export type PokeBasicInfo = {
+  name: string
+  url: string
+}
+
 export type PokeInfo = {
   id: number
-  img: string
+  sprites: {
+    other: {
+      dream_world: {
+        front_default: string
+      }
+    }
+  }
   name: string
   isFavorite: boolean
-  type: string
+  types: Array<{
+    type: {
+      name: keyof typeof pokemonTypeColor
+    }
+  }>
   weight: string
   height: string
   abilities: string
@@ -17,8 +34,3 @@ export type PokeInfo = {
     spd: string
   }
 }
-
-export type PokeCardData = Pick<
-  PokeInfo,
-  'id' | 'img' | 'name' | 'type' | 'isFavorite'
->

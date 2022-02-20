@@ -1,43 +1,27 @@
 import styled from 'styled-components'
+import { pokemonTypeColor } from '../../utils/pokemons'
 
-// type CardProps = {
-//   pokeType:
-//     | 'rock'
-//     | 'ghost'
-//     | 'steel'
-//     | 'water'
-//     | 'grass'
-//     | 'phychic'
-//     | 'ice'
-//     | 'dark'
-//     | 'fairy'
-//     | 'normal'
-//     | 'fighting'
-//     | 'flying'
-//     | 'poison'
-//     | 'ground'
-//     | 'bug'
-//     | 'fire'
-//     | 'electric'
-//     | 'dragon'
-// }
+type Props = {
+  pokemonType: keyof typeof pokemonTypeColor // melhor tipo
+}
 
-export const CardContainer = styled.div`
+export const CardContainer = styled.div<Props>`
   width: 10.4rem;
   height: 11.2rem;
 
   display: flex;
   flex-flow: column nowrap;
 
-  border: 1px solid #74cb48;
+  border: 1px solid
+    ${({ theme, pokemonType }) => theme.pokemonTypeColor[pokemonType]};
   border-radius: ${({ theme }) => theme.border.radius};
 `
 
-export const CardHeader = styled.header`
+export const CardHeader = styled.header<Props>`
   height: 1.2rem;
   margin: 0.4rem 0.8rem 0rem;
   font-size: ${({ theme }) => theme.font.sizes.xsmall};
-  color: #74cb48;
+  color: ${({ theme, pokemonType }) => theme.pokemonTypeColor[pokemonType]};
 
   display: flex;
   align-items: center;
@@ -54,11 +38,12 @@ export const CardImg = styled.img`
   margin: 0 auto;
 `
 
-export const CardFooter = styled.footer`
+export const CardFooter = styled.footer<Props>`
   height: 2.4rem;
   border-radius: 0rem 1rem 1rem 0rem;
 
   color: ${({ theme }) => theme.colors.white};
   text-align: center;
-  background-color: #74cb48;
+  background-color: ${({ theme, pokemonType }) =>
+    theme.pokemonTypeColor[pokemonType]};
 `

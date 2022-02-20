@@ -2,24 +2,28 @@ import bulbasaur from '../../assets/bulbasaur.svg'
 import heart from '../../assets/heart.svg'
 
 //Types
-import { PokeCardData } from '../../types/types'
+import { PokeInfo } from '../../types/types'
 
 type PokeCardProps = {
-  card: PokeCardData
+  pokemon: PokeInfo
 }
 
 import * as S from './PokeCard.styles'
 
-export const PokeCard = ({ card }: PokeCardProps) => {
-  console.log(card)
+export const PokeCard = ({ pokemon }: PokeCardProps) => {
   return (
-    <S.CardContainer>
-      <S.CardHeader>
+    <S.CardContainer pokemonType={pokemon.types[0].type.name}>
+      <S.CardHeader pokemonType={pokemon.types[0].type.name}>
         <img src={heart} alt="heart" />
-        <span>{card.id}</span>
+        <span>{pokemon.id}</span>
       </S.CardHeader>
-      <S.CardImg src={card.img} alt={card.name} />
-      <S.CardFooter>{card.name}</S.CardFooter>
+      <S.CardImg
+        src={pokemon.sprites.other.dream_world.front_default}
+        alt={pokemon.name}
+      />
+      <S.CardFooter pokemonType={pokemon.types[0].type.name}>
+        {pokemon.name}
+      </S.CardFooter>
     </S.CardContainer>
     //add type to get the color
   )
