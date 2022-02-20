@@ -11,6 +11,7 @@ export const GlobalStyle = createGlobalStyle`
   ${({ theme }) => css`
     html {
       font-size: 62.5%; //10px = 1rem
+      font-weight: ${theme.font.weight.regular};
     }
     body {
       font-family: ${theme.font.family};

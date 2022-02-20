@@ -5,7 +5,7 @@ export default {
   font: {
     family: 'Poppins, sans-serif',
     weight: {
-      light: 400,
+      regular: 400,
       semiBold: 500,
       bold: 700,
     },
