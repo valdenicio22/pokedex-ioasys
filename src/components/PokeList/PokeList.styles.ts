@@ -5,5 +5,7 @@ export const ListContainer = styled.div`
   width: 100%;
   margin: 5rem auto;
 
-  border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${({ theme }) => theme.font.sizes.medium};
 `

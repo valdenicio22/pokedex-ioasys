@@ -40,7 +40,7 @@ export const CardImg = styled.img`
 
 export const CardFooter = styled.footer<Props>`
   height: 2.4rem;
-  border-radius: 0rem 1rem 1rem 0rem;
+  border-radius: 0rem 0rem 1rem 1rem;
 
   color: ${({ theme }) => theme.colors.white};
   text-align: center;
