@@ -1,6 +1,14 @@
 import bulbasaur from '../../assets/bulbasaur.svg'
 import heart from '../../assets/heart.svg'
 
+//Types
+import { PokeInfo } from '../../types/types'
+PokeCardData
+
+type PokeCardProps = {
+  card
+}
+
 import * as S from './PokeCard.styles'
 
 export const PokeCard = () => {
