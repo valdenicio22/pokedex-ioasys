@@ -2,7 +2,7 @@ import { pokemonTypeColor } from '../utils/pokemons'
 
 export default {
   border: {
-    radius: '1rem',
+    radius: '0.8rem',
   },
   font: {
     family: 'Poppins, sans-serif',

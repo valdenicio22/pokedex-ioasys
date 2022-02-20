@@ -18,7 +18,7 @@ export const PokeCard = ({ pokemon }: PokeCardProps) => {
         <span>{pokemon.id}</span>
       </S.CardHeader>
       <S.CardImg
-        src={pokemon.sprites.other.dream_world.front_default}
+        src={pokemon.sprites.other['official-artwork'].front_default}
         alt={pokemon.name}
       />
       <S.CardFooter pokemonType={pokemon.types[0].type.name}>

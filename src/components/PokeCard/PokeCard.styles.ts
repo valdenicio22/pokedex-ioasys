@@ -14,6 +14,7 @@ export const CardContainer = styled.div<Props>`
 
   border: 1px solid
     ${({ theme, pokemonType }) => theme.pokemonTypeColor[pokemonType]};
+
   border-radius: ${({ theme }) => theme.border.radius};
 `
 
@@ -40,10 +41,9 @@ export const CardImg = styled.img`
 
 export const CardFooter = styled.footer<Props>`
   height: 2.4rem;
-  border-radius: 0rem 0rem 1rem 1rem;
-
   color: ${({ theme }) => theme.colors.white};
   text-align: center;
   background-color: ${({ theme, pokemonType }) =>
     theme.pokemonTypeColor[pokemonType]};
+  border-radius: 0 0 0.7rem 0.7rem;
 `
