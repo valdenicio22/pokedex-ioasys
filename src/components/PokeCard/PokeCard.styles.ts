@@ -1,11 +1,33 @@
 import styled from 'styled-components'
 
+// type CardProps = {
+//   pokeType:
+//     | 'rock'
+//     | 'ghost'
+//     | 'steel'
+//     | 'water'
+//     | 'grass'
+//     | 'phychic'
+//     | 'ice'
+//     | 'dark'
+//     | 'fairy'
+//     | 'normal'
+//     | 'fighting'
+//     | 'flying'
+//     | 'poison'
+//     | 'ground'
+//     | 'bug'
+//     | 'fire'
+//     | 'electric'
+//     | 'dragon'
+// }
+
 export const CardContainer = styled.div`
   width: 10.4rem;
   height: 11.2rem;
 
   display: flex;
-  flex-flow: column;
+  flex-flow: column nowrap;
 
   border: 1px solid #74cb48;
   border-radius: ${({ theme }) => theme.border.radius};

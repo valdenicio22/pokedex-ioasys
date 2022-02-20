@@ -4,12 +4,7 @@ import { PokeCard } from '../PokeCard/PokeCard'
 import * as S from './PokeList.styles'
 
 //Types
-import { PokeInfo } from '../../types/types'
-
-type PokeCardData = Pick<
-  PokeInfo,
-  'id' | 'img' | 'name' | 'type' | 'isFavorite'
->
+import { PokeInfo, PokeCardData } from '../../types/types'
 
 export const PokeList = () => {
   const [pokeCardsData, setPokeCardsData] = useState<PokeCardData[]>([])
@@ -17,22 +12,14 @@ export const PokeList = () => {
 
   useEffect(() => {
     try {
-      api.get('pokemon?limit=20&offset=0').then(({ data }) => {
-        const { results } = data
-        for (let i = 0; i < results.length; i++) {
-          api.get(`pokemon/${results[i].name}`).then(({ data }) => {
-            const newPoke = {
-              id: data.id,
-              img: data.sprites.other.dream_world.front_default,
-              name: data.species.name,
-              type: data.types[0].type.name,
-              isFavorite: false,
-            }
-            setPokeCardsData([...pokeCardsData, newPoke])
-          })
-        }
-        // setPokeNames(data.results.name)
-      })
+      const pokesData = async () => {
+        const pokeList = await api.get('pokemon?limit=20&offset=0')
+        const { data: pokeListData } = pokeList
+        const pokeListInfo = pokeListData
+        console.log(pokeListData)
+      }
+
+      pokesData()
     } catch (error) {
       console.log(error)
     }
@@ -40,9 +27,7 @@ export const PokeList = () => {
 
   return (
     <S.ListContainer>
-      {pokeCardsData.map((card) => (
-        <PokeCard card={card} />
-      ))}
+      {/* {pokeCardsData.map((card) => console.log(card))} */}
     </S.ListContainer>
   )
 }

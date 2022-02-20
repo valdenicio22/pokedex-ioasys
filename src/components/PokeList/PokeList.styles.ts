@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
 
 export const ListContainer = styled.div`
-  width: ${({ theme }) => theme.containers.mobile};
+  max-width: ${({ theme }) => theme.containers.mobile};
+  width: 100%;
   margin: 5rem auto;
 
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid black;
 `
