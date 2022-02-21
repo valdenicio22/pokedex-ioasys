@@ -18,3 +18,22 @@ export const FavoriteContainer = styled.section`
     }
   `}
 `
+
+export const ButtonContainer = styled.button`
+  ${({ theme }) => css`
+    width: ${theme.containers.mobile};
+    margin: 3.5rem auto;
+    border: none;
+    background-color: transparent;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      font-size: ${theme.font.sizes.small};
+      color: rgba(178, 178, 178, 0.9);
+    }
+  `}
+`

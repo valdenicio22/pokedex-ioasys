@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
       font-family: ${theme.font.family};
       font-size: ${theme.font.sizes.small}; // 14px
+      background-color: ${theme.colors.lightModeBg};
     }
   `}
   button{

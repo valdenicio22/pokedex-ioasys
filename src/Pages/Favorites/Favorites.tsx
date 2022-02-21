@@ -1,13 +1,16 @@
 import * as S from './Favorites.styles'
+import returnArrow from '../../assets/returnArrow.svg'
 
 import { Header } from '../../components/Header/Header'
 import { Heart } from '../../components/SvgComponents/Heart'
 import { TopHeader } from '../../components/TopHeader/TopHeader'
 import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext'
 import { PokeCard } from '../../components/PokeCard/PokeCard'
+import { useNavigate } from 'react-router-dom'
 
 export const Favorites = () => {
   const { favoritesPokemons } = useFavoritesPokemons()
+  const navigate = useNavigate()
 
   console.log(favoritesPokemons)
   return (
@@ -21,6 +24,10 @@ export const Favorites = () => {
       {favoritesPokemons.map((pokemon) => (
         <PokeCard pokemon={pokemon} />
       ))}
+      <S.ButtonContainer type="button" onClick={() => navigate('/')}>
+        <img src={returnArrow} alt="Return Arrow" />
+        <p>Voltar</p>
+      </S.ButtonContainer>
     </>
   )
 }

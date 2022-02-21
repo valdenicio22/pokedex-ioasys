@@ -21,7 +21,7 @@ export default {
   },
   colors: {
     primary: '#EC0344',
-    lightModeBg: '#06092B',
+    lightModeBg: '#FFFFFF',
     darkModeBg: '#212121',
     white: '#FFFFFF',
     lightGray: '#E0E0E0',
