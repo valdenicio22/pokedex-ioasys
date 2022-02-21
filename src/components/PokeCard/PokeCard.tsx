@@ -6,9 +6,10 @@ import * as S from './PokeCard.styles'
 
 type PokeCardProps = {
   pokemon: PokeInfo
+  isFavorite: boolean
 }
 
-export const PokeCard = ({ pokemon }: PokeCardProps) => {
+export const PokeCard = ({ pokemon, isFavorite }: PokeCardProps) => {
   const { toggleFavoritePokemons } = useFavoritesPokemons()
 
   return (
@@ -18,7 +19,7 @@ export const PokeCard = ({ pokemon }: PokeCardProps) => {
           <Heart
             width={'12'}
             height={'12'}
-            fill={pokemon.isFavorite ? '#EC0344' : '#FFFFFF'}
+            fill={isFavorite ? '#EC0344' : '#FFFFFF'}
           />
         </button>
         <span>{pokemon.id}</span>

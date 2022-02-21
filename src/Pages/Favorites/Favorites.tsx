@@ -23,7 +23,7 @@ export const Favorites = () => {
       </S.FavoriteContainer>
       <S.FavoriteListContainer>
         {favoritesPokemons.map((pokemon) => (
-          <PokeCard pokemon={pokemon} />
+          <PokeCard pokemon={pokemon} isFavorite={true} />
         ))}
       </S.FavoriteListContainer>
       <S.ButtonContainer type="button" onClick={() => navigate('/')}>

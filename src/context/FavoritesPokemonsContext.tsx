@@ -11,7 +11,7 @@ type FavoritePokemonsContextData = {
   addPokemonToFavoriteList: (pokemon: PokeInfo) => void
   toggleFavoritePokemons: (pokemon: PokeInfo) => void
   removePokemonFromFavoriteList: (pokemonid: PokeInfo['id']) => void
-  checkPokemonOnFavoriteList: (pokemonid: PokeInfo['id']) => void
+  checkPokemonOnFavoriteList: (pokemonid: PokeInfo['id']) => boolean
 }
 
 export const FavoritePokemonsContext =
