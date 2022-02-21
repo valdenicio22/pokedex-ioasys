@@ -15,7 +15,6 @@ export type PokeInfo = {
     }
   }
   name: string
-  isFavorite: boolean
   types: Array<{
     type: {
       name: keyof typeof pokemonTypeColor

@@ -21,9 +21,11 @@ export const Favorites = () => {
         <Heart width="30" height="30" fill="#EC0344" />
         <h1>Meus Favoritos</h1>
       </S.FavoriteContainer>
-      {favoritesPokemons.map((pokemon) => (
-        <PokeCard pokemon={pokemon} />
-      ))}
+      <S.FavoriteListContainer>
+        {favoritesPokemons.map((pokemon) => (
+          <PokeCard pokemon={pokemon} />
+        ))}
+      </S.FavoriteListContainer>
       <S.ButtonContainer type="button" onClick={() => navigate('/')}>
         <img src={returnArrow} alt="Return Arrow" />
         <p>Voltar</p>

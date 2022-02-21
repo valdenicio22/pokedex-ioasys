@@ -19,6 +19,15 @@ export const FavoriteContainer = styled.section`
   `}
 `
 
+export const FavoriteListContainer = styled.main`
+  width: ${({ theme }) => theme.containers.mobile};
+  margin: 5rem auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${({ theme }) => theme.font.sizes.medium};
+`
+
 export const ButtonContainer = styled.button`
   ${({ theme }) => css`
     width: ${theme.containers.mobile};

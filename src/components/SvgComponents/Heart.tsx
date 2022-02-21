@@ -1,7 +1,7 @@
 type HeartProps = {
   width: string
   height: string
-  fill: string
+  fill: '#FFFFFF' | '#EC0344'
 }
 
 export const Heart = ({ width, height, fill }: HeartProps) => {

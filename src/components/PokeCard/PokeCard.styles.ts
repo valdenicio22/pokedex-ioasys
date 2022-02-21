@@ -27,6 +27,11 @@ export const CardHeader = styled.header<Props>`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  button {
+    border: none;
+    background-color: transparent;
+  }
 `
 
 export const CardImg = styled.img`

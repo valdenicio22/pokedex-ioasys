@@ -2,21 +2,24 @@
 import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext'
 import { PokeInfo } from '../../types/types'
 import { Heart } from '../SvgComponents/Heart'
+import * as S from './PokeCard.styles'
 
 type PokeCardProps = {
   pokemon: PokeInfo
 }
 
-import * as S from './PokeCard.styles'
-
 export const PokeCard = ({ pokemon }: PokeCardProps) => {
-  const { addPokemonToFavoriteList } = useFavoritesPokemons()
+  const { toggleFavoritePokemons } = useFavoritesPokemons()
 
   return (
     <S.CardContainer pokemonType={pokemon.types[0].type.name}>
       <S.CardHeader pokemonType={pokemon.types[0].type.name}>
-        <button onClick={() => addPokemonToFavoriteList(pokemon)}>
-          <Heart width={'12'} height={'12'} fill={'#FFFFFF'} />
+        <button onClick={() => toggleFavoritePokemons(pokemon)}>
+          <Heart
+            width={'12'}
+            height={'12'}
+            fill={pokemon.isFavorite ? '#EC0344' : '#FFFFFF'}
+          />
         </button>
         <span>{pokemon.id}</span>
       </S.CardHeader>
