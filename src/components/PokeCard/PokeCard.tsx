@@ -3,6 +3,7 @@ import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext'
 import { PokeInfo } from '../../types/types'
 import { Heart } from '../SvgComponents/Heart'
 import * as S from './PokeCard.styles'
+import { useNavigate, useParams } from 'react-router-dom'
 
 type PokeCardProps = {
   pokemon: PokeInfo
@@ -10,7 +11,14 @@ type PokeCardProps = {
 }
 
 export const PokeCard = ({ pokemon, isFavorite }: PokeCardProps) => {
+  const navigate = useNavigate()
+  const { pokemonName } = useParams()
+
   const { toggleFavoritePokemons } = useFavoritesPokemons()
+
+  const handleDetailsPokemonPage = () => {
+    console.log('Oni-Chan')
+  }
 
   return (
     <S.CardContainer pokemonType={pokemon.types[0].type.name}>
@@ -24,13 +32,15 @@ export const PokeCard = ({ pokemon, isFavorite }: PokeCardProps) => {
         </button>
         <span>{pokemon.id}</span>
       </S.CardHeader>
-      <S.CardImg
-        src={pokemon.sprites.other['official-artwork'].front_default}
-        alt={pokemon.name}
-      />
-      <S.CardFooter pokemonType={pokemon.types[0].type.name}>
-        {pokemon.name}
-      </S.CardFooter>
+      <S.CardBtn onClick={() => navigate(`/pokemonDetails/${pokemon.name}`)}>
+        <S.CardImg
+          src={pokemon.sprites.other['official-artwork'].front_default}
+          alt={pokemon.name}
+        />
+        <S.CardFooter pokemonType={pokemon.types[0].type.name}>
+          {pokemon.name}
+        </S.CardFooter>
+      </S.CardBtn>
     </S.CardContainer>
     //add type to get the color
   )

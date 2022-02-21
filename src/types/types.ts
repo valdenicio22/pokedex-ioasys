@@ -6,7 +6,14 @@ export type PokeBasicInfo = {
 }
 
 export type PokeInfo = {
+  abilities: Array<{
+    ability: {
+      name: string
+    }
+  }>
+  height: number
   id: number
+  name: string
   sprites: {
     other: {
       'official-artwork': {
@@ -14,22 +21,17 @@ export type PokeInfo = {
       }
     }
   }
-  name: string
+  stats: Array<{
+    baseStat: number
+    Stat: {
+      name: string
+    }
+  }>
   types: Array<{
     type: {
       name: keyof typeof pokemonTypeColor
     }
   }>
-  weight: string
-  height: string
-  abilities: string
+  weight: number
   about?: string
-  baseStats: {
-    hp: string
-    atk: string
-    def: string
-    satk: string
-    sdef: string
-    spd: string
-  }
 }

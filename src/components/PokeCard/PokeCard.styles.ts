@@ -48,3 +48,7 @@ export const CardFooter = styled.footer<Props>`
     theme.pokemonTypeColor[pokemonType]};
   border-radius: 0 0 0.7rem 0.7rem;
 `
+export const CardBtn = styled.button`
+  border: none;
+  background-color: transparent;
+`

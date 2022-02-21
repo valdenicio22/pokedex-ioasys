@@ -16,3 +16,8 @@ export const getPokemonsData = async () => {
   const pokeListInfo = await Promise.all(pendingPokeListInfo)
   return pokeListInfo.map((poke) => poke.data)
 }
+
+export const getPokemonByName = async (pokemonName: PokeInfo['name']) => {
+  const response = await api.get<{ data: PokeInfo }>(`pokemon/${pokemonName}`)
+  return response.data
+}

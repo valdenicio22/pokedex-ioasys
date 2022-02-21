@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 //Pages
 import { Home } from './Pages/Home/Home'
 import { Favorites } from './Pages/Favorites/Favorites'
-import { PokemonDetails } from './components/PokemonDetails/PokemonDetails'
+import { PokemonDetails } from './Pages/PokemonDetails/PokemonDetails'
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage'
 //Context
 import { FavoritesPokemonsProvider } from './context/FavoritesPokemonsContext'
@@ -20,7 +20,10 @@ export function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/favorites" element={<Favorites />} />
-            <Route path="/pokemonDetails" element={<PokemonDetails />} />
+            <Route
+              path="/pokemonDetails/:pokemonName"
+              element={<PokemonDetails />}
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <GlobalStyle />

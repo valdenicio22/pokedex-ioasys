@@ -35,7 +35,7 @@ export const FavoritesPokemonsProvider = (
   }
 
   const addPokemonToFavoriteList = (pokemon: PokeInfo) => {
-    if (favoritesPokemons.length > 12) return alert('Favorite list is full') // Should pass false and the error msg
+    if (favoritesPokemons.length >= 12) return alert('Favorite list is full') // Should pass false and the error msg
 
     const updatedFavoritePokemonList = [...favoritesPokemons, pokemon]
     setFavoritesPokemons(updatedFavoritePokemonList)

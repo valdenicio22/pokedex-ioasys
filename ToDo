@@ -1,0 +1,12 @@
+Favoritos
+  -> Salvar no localStorage
+  -> Pegar do localStorage1
+  -> Criar Esqueleton
+  -> 12 é o número máximo de pokemons na lista
+
+
+Criar página de detalhes
+criar busca pelo pokemon
+criar componente de grid area .. reutilizar componente na area de favoritos e na página home
+testar página do OPs
+Criar toggle de cor

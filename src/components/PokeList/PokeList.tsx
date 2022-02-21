@@ -20,7 +20,6 @@ export const PokeList = () => {
     }
   }, [])
 
-  console.log(pokemons)
   return (
     <S.ListContainer>
       {pokemons.map((pokemon) => {
@@ -33,10 +32,6 @@ export const PokeList = () => {
           />
         )
       })}
-      {/* {pokemons.map((pokemon) => (
-        
-        <PokeCard pokemon={pokemon} key={pokemon.id} />
-      ))} */}
     </S.ListContainer>
   )
 }
