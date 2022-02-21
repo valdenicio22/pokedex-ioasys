@@ -27,10 +27,6 @@ export const CardHeader = styled.header<Props>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  img {
-    height: 1.2rem;
-  }
 `
 
 export const CardImg = styled.img`

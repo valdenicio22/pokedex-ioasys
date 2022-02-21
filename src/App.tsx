@@ -2,24 +2,30 @@
 import { ThemeProvider } from 'styled-components'
 import theme from './styles/theme'
 import { GlobalStyle } from './styles/Global'
-//Components
-import { TopHeader } from './components/TopHeader/TopHeader'
-import { Header } from './components/Header/Header'
-import { Search } from './components/Search/Search'
-import { PokeList } from './components/PokeList/PokeList'
-import { Favorites } from './components/Favorites/Favorites'
 //React-router-dom
-import { Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+//Pages
+import { Home } from './Pages/Home/Home'
+import { Favorites } from './Pages/Favorites/Favorites'
+import { PokemonDetails } from './components/PokemonDetails/PokemonDetails'
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage'
+//Context
+import { FavoritesPokemonsProvider } from './context/FavoritesPokemonsContext'
 
 export function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <TopHeader />
-      <Header />
-      <Search />
-      <PokeList />
-      <Link to="/favorites">Favorites</Link>
-      <GlobalStyle />
-    </ThemeProvider>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <FavoritesPokemonsProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/pokemonDetails" element={<PokemonDetails />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+          <GlobalStyle />
+        </FavoritesPokemonsProvider>
+      </ThemeProvider>
+    </Router>
   )
 }

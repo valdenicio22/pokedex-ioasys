@@ -1,8 +1,7 @@
-import bulbasaur from '../../assets/bulbasaur.svg'
-import heart from '../../assets/heart.svg'
-
 //Types
+import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext'
 import { PokeInfo } from '../../types/types'
+import { Heart } from '../SvgComponents/Heart'
 
 type PokeCardProps = {
   pokemon: PokeInfo
@@ -11,10 +10,14 @@ type PokeCardProps = {
 import * as S from './PokeCard.styles'
 
 export const PokeCard = ({ pokemon }: PokeCardProps) => {
+  const { addPokemonToFavoriteList } = useFavoritesPokemons()
+
   return (
     <S.CardContainer pokemonType={pokemon.types[0].type.name}>
       <S.CardHeader pokemonType={pokemon.types[0].type.name}>
-        <img src={heart} alt="heart" />
+        <button onClick={() => addPokemonToFavoriteList(pokemon)}>
+          <Heart width={'12'} height={'12'} fill={'#FFFFFF'} />
+        </button>
         <span>{pokemon.id}</span>
       </S.CardHeader>
       <S.CardImg

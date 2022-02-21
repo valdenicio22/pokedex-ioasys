@@ -25,7 +25,8 @@ export default {
     darkModeBg: '#212121',
     white: '#FFFFFF',
     lightGray: '#E0E0E0',
-    mediumGray: '#666666',
+    mediumGray: '#BDBDBD',
+    darkGray: '#666666',
   },
   pokemonTypeColor,
   containers: {
