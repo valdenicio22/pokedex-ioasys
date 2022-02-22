@@ -12,7 +12,6 @@ export const Favorites = () => {
   const { favoritesPokemons } = useFavoritesPokemons()
   const navigate = useNavigate()
 
-  console.log(favoritesPokemons)
   return (
     <>
       <TopHeader />

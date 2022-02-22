@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { pokemonTypeColor } from '../../utils/pokemons'
 
 type Props = {
-  pokemonType: keyof typeof pokemonTypeColor // melhor tipo
+  pokemonType: keyof typeof pokemonTypeColor // melhorar tipo
 }
 
 export const CardContainer = styled.div<Props>`

@@ -18,6 +18,6 @@ export const getPokemonsData = async () => {
 }
 
 export const getPokemonByName = async (pokemonName: PokeInfo['name']) => {
-  const response = await api.get<{ data: PokeInfo }>(`pokemon/${pokemonName}`)
+  const response = await api.get<PokeInfo>(`pokemon/${pokemonName}`)
   return response.data
 }

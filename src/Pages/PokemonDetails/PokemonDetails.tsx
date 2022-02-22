@@ -4,23 +4,33 @@ import { Heart } from '../../components/SvgComponents/Heart'
 import { getPokemonByName } from '../../service/api'
 import { PokeInfo } from '../../types/types'
 
+import * as S from './PokemonDetails.styles'
+
 export const PokemonDetails = () => {
   const navigate = useNavigate()
   const { pokemonName } = useParams()
-
   const [pokemon, setPokemon] = useState<PokeInfo>()
 
   useEffect(() => {
-    getPokemonByName(pokemonName!).then((pokemonData) =>
-      setPokemon(pokemonData)
-    )
+    try {
+      getPokemonByName(pokemonName!).then((pokemonData) =>
+        setPokemon(pokemonData)
+      )
+    } catch (error) {
+      console.log(error)
+    }
   }, [])
 
-  return (
-    <header>
-      <Heart width="30" height="30" fill="#EC0344" />
-      <p>The pokermon name is : {pokemonName} </p>
+  return pokemon ? (
+    <S.PdContainer pokemonType={pokemon.types[0].type.name}>
+      <div>
+        <Heart width="30" height="30" fill="#EC0344" />
+        <h2>{pokemonName}</h2>
+      </div>
+      <span>{pokemon.id}</span>
       <button onClick={() => navigate('/')}>voltar</button>
-    </header>
+    </S.PdContainer>
+  ) : (
+    <h1>Loading...</h1>
   )
 }
