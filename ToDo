@@ -1,3 +1,8 @@
+Home Page
+  -> Colocar Skeleton
+  -> Colocar o fetch das imagens por Id
+  -> Primeiro fetch pega os id e dps outro apenas para imagens;
+
 Favoritos
   -> Salvar no localStorage
   -> Pegar do localStorage1
