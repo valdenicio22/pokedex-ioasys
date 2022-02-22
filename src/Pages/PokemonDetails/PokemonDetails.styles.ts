@@ -5,36 +5,27 @@ type Props = {
   pokemonType: keyof typeof pokemonTypeColor // melhorar tipo
 }
 
-// export const PokemonDetailsContainer = styled.div<Props>`
-//   width: 428px;
-//   margin: 0 auto;
-//   padding: 1.6rem 0.8rem;
-//   background-color: ${({ theme, pokemonType }) =>
-//     theme.pokemonTypeColor[pokemonType]};
-// `
-
-//PD = Pokemon Details
+//Pd = Pokemon Details
 export const PdContainer = styled.div<Props>`
-  width: 428px;
+  width: 42.8rem;
   margin: 0 auto;
   padding: 1.6rem 0.8rem;
+  height: 100vh;
 
-  border: 1px solid black;
+  background-color: ${({ theme, pokemonType }) =>
+    theme.pokemonTypeColor[pokemonType]};
 `
 
 export const PdHeader = styled.header`
-  ${({ theme }) => css`
-    width: ${theme.containers.mobile}
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid black;
-  `}
+  width: ${({ theme }) => theme.containers.mobile};
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   div {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 1rem;
   }
 `

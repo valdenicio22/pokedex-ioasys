@@ -13,7 +13,8 @@ export const PokemonDetails = () => {
 
   useEffect(() => {
     try {
-      getPokemonByName(pokemonName!).then((pokemonData) =>
+      if (!pokemonName) return
+      getPokemonByName(pokemonName).then((pokemonData) =>
         setPokemon(pokemonData)
       )
     } catch (error) {
@@ -23,11 +24,25 @@ export const PokemonDetails = () => {
 
   return pokemon ? (
     <S.PdContainer pokemonType={pokemon.types[0].type.name}>
+      <S.PdHeader>
+        <div>
+          <Heart width="30" height="30" fill="#EC0344" />
+          <h2>{pokemonName}</h2>
+        </div>
+        <span>{pokemon.id}</span>
+      </S.PdHeader>
+
       <div>
-        <Heart width="30" height="30" fill="#EC0344" />
-        <h2>{pokemonName}</h2>
+        <img src="" alt="" />
+        <div>
+          {' '}
+          type
+          <div>Grass</div>
+          <div>Poison</div>
+        </div>
+        <div></div>
       </div>
-      <span>{pokemon.id}</span>
+
       <button onClick={() => navigate('/')}>voltar</button>
     </S.PdContainer>
   ) : (
