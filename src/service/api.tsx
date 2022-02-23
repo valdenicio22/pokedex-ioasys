@@ -5,6 +5,11 @@ export const api = axios.create({
   baseURL: `https://pokeapi.co/api/v2/`,
 })
 
+// Get the pokemon id from the url using slice
+// Get just the pokemon photo
+// https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg
+// return pokemonCardData, putting together thoses pices of data.
+
 export const getPokemonsData = async () => {
   const response = await api.get<{ results: PokeBasicInfo[] }>(
     'pokemon?limit=20&offset=0'
