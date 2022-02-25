@@ -1,6 +1,6 @@
 import { pokemonTypeColor } from '../utils/pokemons'
 
-export type PokeBasicInfo = {
+export type PokemonBasicInfo = {
   name: string
   url: string
 }

@@ -12,6 +12,11 @@ export const PokeList = () => {
   const [pokemons, setPokemons] = useState<PokeInfo[]>([])
   const { checkPokemonOnFavoriteList } = useFavoritesPokemons()
 
+  /*
+   pokemonImg
+   https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg
+   */
+
   useEffect(() => {
     try {
       getPokemonsData().then((pokemonsResult) => setPokemons(pokemonsResult))
