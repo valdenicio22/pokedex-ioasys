@@ -1,12 +1,12 @@
 //Types
 import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext'
-import { PokeInfo } from '../../types/types'
+import { PokemonCard } from '../../types/types'
 import { Heart } from '../SvgComponents/Heart'
 import * as S from './PokeCard.styles'
 import { useNavigate, useParams } from 'react-router-dom'
 
 type PokeCardProps = {
-  pokemon: PokeInfo
+  pokemon: PokemonCard
   isFavorite: boolean
 }
 

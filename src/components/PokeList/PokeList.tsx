@@ -1,29 +1,26 @@
 import { useState, useEffect } from 'react'
-import { getPokemonsData } from '../../service/api'
+import { getPokemonCardData } from '../../service/api'
 import { PokeCard } from '../PokeCard/PokeCard'
 import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext'
 
 import * as S from './PokeList.styles'
 
 //Types
-import { PokeInfo } from '../../types/types'
+import { PokemonCard } from '../../types/types'
 
 export const PokeList = () => {
-  const [pokemons, setPokemons] = useState<PokeInfo[]>([])
+  const [pokemons, setPokemons] = useState<PokemonCard[]>([])
   const { checkPokemonOnFavoriteList } = useFavoritesPokemons()
-
-  /*
-   pokemonImg
-   https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg
-   */
 
   useEffect(() => {
     try {
-      getPokemonsData().then((pokemonsResult) => setPokemons(pokemonsResult))
+      getPokemonCardData().then((pokemonCard) => setPokemons(pokemonCard))
     } catch (error) {
       console.log(error)
     }
   }, [])
+
+  console.log('pokemons', pokemons)
 
   return (
     <S.ListContainer>

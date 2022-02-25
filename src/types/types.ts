@@ -4,6 +4,11 @@ export type PokemonBasicInfo = {
   name: string
   url: string
 }
+export type PokemonCard = {
+  id: number
+  name: string
+  img: string
+}
 
 export type PokeInfo = {
   abilities: Array<{

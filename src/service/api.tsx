@@ -1,25 +1,35 @@
 import axios from 'axios'
-import { PokemonBasicInfo, PokeInfo } from '../types/types'
+import { PokemonBasicInfo, PokeInfo, PokemonCard} from '../types/types'
 
 export const api = axios.create({
   baseURL: `https://pokeapi.co/api/v2/`,
 })
 
-// Get the pokemon id from the url using slice
-// Get just the pokemon photo
-// https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg
-// return pokemonCardData, putting together thoses pices of data.
-
-export const getPokemonsData = async () => {
-  const response = await api.get<{ results: PokemonBasicInfo[] }>(
+export const getPokemonCardData = async () => {
+  const responsePokemonNameUrl = await api.get<{ results: PokemonBasicInfo[] }>(
     'pokemon?limit=20&offset=0'
   )
-  const pokemonList = response.data.results
+  const pokemonList = responsePokemonNameUrl.data.results
+
   let pokemonIdList: PokeInfo['id'][] = []
-  pokemonList.forEach((pokemon) =>
-    pokemonIdList.push(+pokemon.url.slice(34, -1))
+  pokemonList.forEach(
+    (pokemon) => pokemonIdList.push(+pokemon.url.slice(34, -1)) // getting the pokemonId out of the url
   )
-  console.log(pokemonIdList)
+  const pendingPokemonImgList = pokemonIdList.map((id) =>
+    axios.get<string>(
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`
+    )
+  )
+  const responsePokemonImgList = await Promise.all(pendingPokemonImgList)
+
+  const pokemonCard: PokemonCard[] = pokemonIdList.map((id, index) => {
+    return {
+      id: id,
+      name: pokemonList[index].name,
+      img: responsePokemonImgList[index].data,
+    }
+  })
+  return pokemonCard.map((Card) => Card)
 }
 
 export const getPokemonByName = async (pokemonName: PokeInfo['name']) => {
