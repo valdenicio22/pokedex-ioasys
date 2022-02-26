@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 export const HeaderContainer = styled.header`
   width: ${(props) => props.theme.containers.mobile};
@@ -7,7 +7,7 @@ export const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`
+`;
 
 export const LogoContainer = styled.div`
   width: 100%;
@@ -27,4 +27,4 @@ export const LogoContainer = styled.div`
       color: ${theme.colors.primary};
     }
   `}
-`
+`;

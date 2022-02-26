@@ -17,4 +17,4 @@ export const pokemonTypeColor = {
   fire: '#F57D31',
   electric: '#F9CF30',
   dragon: '#7037FF',
-}
+};

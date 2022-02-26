@@ -1,10 +1,10 @@
-import * as S from './Header.styles'
-import Switch from '@mui/material/Switch'
-import { useState } from 'react'
-import logo from '../../assets/logo.svg'
+import * as S from './Header.styles';
+import Switch from '@mui/material/Switch';
+import { useState } from 'react';
+import logo from '../../assets/logo.svg';
 
 export const Header = () => {
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(false);
 
   return (
     <S.HeaderContainer>
@@ -15,5 +15,5 @@ export const Header = () => {
 
       <Switch checked={checked} onChange={() => setChecked(!checked)} />
     </S.HeaderContainer>
-  )
-}
+  );
+};

@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components'
-import { pokemonTypeColor } from '../../utils/pokemons'
+import styled, { css } from 'styled-components';
+import { pokemonTypeColor } from '../../utils/pokemons';
 
 type PtContainerProps = {
-  typeName: keyof typeof pokemonTypeColor
-}
+  typeName: keyof typeof pokemonTypeColor;
+};
 //Pt = Pokemon Type
 export const PtContainer = styled.div<PtContainerProps>`
   width: fit-content;
@@ -18,4 +18,4 @@ export const PtContainer = styled.div<PtContainerProps>`
     color: ${theme.colors.white};
     background-color: ${theme.pokemonTypeColor[typeName]};
   `}
-`
+`;

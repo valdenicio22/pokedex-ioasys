@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 // Nfp = Not Found Page
 export const NfpContainer = styled.main`
@@ -17,4 +17,4 @@ export const NfpContainer = styled.main`
       line-height: 3.1;
     }
   `}
-`
+`;

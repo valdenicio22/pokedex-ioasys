@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 export const FavoriteContainer = styled.section`
   ${({ theme }) => css`
@@ -17,7 +17,7 @@ export const FavoriteContainer = styled.section`
       font-weight: ${theme.font.weight.semiBold};
     }
   `}
-`
+`;
 
 export const FavoriteListContainer = styled.main`
   width: ${({ theme }) => theme.containers.mobile};
@@ -26,7 +26,7 @@ export const FavoriteListContainer = styled.main`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: ${({ theme }) => theme.font.sizes.medium};
-`
+`;
 
 export const ButtonContainer = styled.button`
   ${({ theme }) => css`
@@ -45,4 +45,4 @@ export const ButtonContainer = styled.button`
       color: rgba(178, 178, 178, 0.9);
     }
   `}
-`
+`;

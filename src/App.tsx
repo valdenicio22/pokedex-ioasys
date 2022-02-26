@@ -1,16 +1,16 @@
 // Styled-components Theme
-import { ThemeProvider } from 'styled-components'
-import theme from './styles/theme'
-import { GlobalStyle } from './styles/Global'
+import { ThemeProvider } from 'styled-components';
+import theme from './styles/theme';
+import { GlobalStyle } from './styles/Global';
 //React-router-dom
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 //Pages
-import { Home } from './Pages/Home/Home'
-import { Favorites } from './Pages/Favorites/Favorites'
-import { PokemonDetails } from './Pages/PokemonDetails/PokemonDetails'
-import { NotFoundPage } from './components/NotFoundPage/NotFoundPage'
+import { Home } from './Pages/Home/Home';
+import { Favorites } from './Pages/Favorites/Favorites';
+import { PokemonDetails } from './Pages/PokemonDetails/PokemonDetails';
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 //Context
-import { FavoritesPokemonsProvider } from './context/FavoritesPokemonsContext'
+import { FavoritesPokemonsProvider } from './context/FavoritesPokemonsContext';
 
 export function App() {
   return (
@@ -30,5 +30,5 @@ export function App() {
         </FavoritesPokemonsProvider>
       </ThemeProvider>
     </Router>
-  )
+  );
 }

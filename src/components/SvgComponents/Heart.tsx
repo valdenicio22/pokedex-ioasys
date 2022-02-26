@@ -1,8 +1,8 @@
 type HeartProps = {
-  width: string
-  height: string
-  fill: '#FFFFFF' | '#EC0344'
-}
+  width: string;
+  height: string;
+  fill: '#FFFFFF' | '#EC0344';
+};
 
 export const Heart = ({ width, height, fill }: HeartProps) => {
   return (
@@ -21,5 +21,5 @@ export const Heart = ({ width, height, fill }: HeartProps) => {
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};

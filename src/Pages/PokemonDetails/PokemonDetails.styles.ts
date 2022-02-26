@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components'
-import { pokemonTypeColor } from '../../utils/pokemons'
+import styled, { css } from 'styled-components';
+import { pokemonTypeColor } from '../../utils/pokemons';
 
 type Props = {
-  pokemonType: keyof typeof pokemonTypeColor // melhorar tipo
-}
+  pokemonType: keyof typeof pokemonTypeColor; // melhorar tipo
+};
 
 //Pd = Pokemon Details
 export const PdContainer = styled.div<Props>`
@@ -14,7 +14,7 @@ export const PdContainer = styled.div<Props>`
 
   background-color: ${({ theme, pokemonType }) =>
     theme.pokemonTypeColor[pokemonType]};
-`
+`;
 
 export const PdHeader = styled.header`
   width: ${({ theme }) => theme.containers.mobile};
@@ -28,7 +28,7 @@ export const PdHeader = styled.header`
     align-items: center;
     gap: 1rem;
   }
-`
+`;
 
 export const PdMain = styled.main`
   ${({ theme }) => css`
@@ -36,4 +36,4 @@ export const PdMain = styled.main`
     height: 50rem;
     background-color: ${theme.colors.white};
   `}
-`
+`;

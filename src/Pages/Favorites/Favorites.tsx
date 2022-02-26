@@ -1,16 +1,16 @@
-import * as S from './Favorites.styles'
-import returnArrow from '../../assets/returnArrow.svg'
+import * as S from './Favorites.styles';
+import returnArrow from '../../assets/returnArrow.svg';
 
-import { Header } from '../../components/Header/Header'
-import { Heart } from '../../components/SvgComponents/Heart'
-import { TopHeader } from '../../components/TopHeader/TopHeader'
-import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext'
-import { PokeCard } from '../../components/PokeCard/PokeCard'
-import { useNavigate } from 'react-router-dom'
+import { Header } from '../../components/Header/Header';
+import { Heart } from '../../components/SvgComponents/Heart';
+import { TopHeader } from '../../components/TopHeader/TopHeader';
+import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext';
+import { PokeCard } from '../../components/PokeCard/PokeCard';
+import { useNavigate } from 'react-router-dom';
 
 export const Favorites = () => {
-  const { favoritesPokemons } = useFavoritesPokemons()
-  const navigate = useNavigate()
+  const { favoritesPokemons } = useFavoritesPokemons();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -30,5 +30,5 @@ export const Favorites = () => {
         <p>Voltar</p>
       </S.ButtonContainer>
     </>
-  )
-}
+  );
+};

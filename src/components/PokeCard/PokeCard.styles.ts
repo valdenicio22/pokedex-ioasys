@@ -1,9 +1,9 @@
-import styled from 'styled-components'
-import { pokemonTypeColor } from '../../utils/pokemons'
+import styled from 'styled-components';
+import { pokemonTypeColor } from '../../utils/pokemons';
 
 type Props = {
-  pokemonType: keyof typeof pokemonTypeColor // melhorar tipo
-}
+  pokemonType: keyof typeof pokemonTypeColor; // melhorar tipo
+};
 
 export const CardContainer = styled.div<Props>`
   width: 10.4rem;
@@ -16,7 +16,7 @@ export const CardContainer = styled.div<Props>`
     ${({ theme, pokemonType }) => theme.pokemonTypeColor[pokemonType]};
 
   border-radius: ${({ theme }) => theme.border.radius};
-`
+`;
 
 export const CardHeader = styled.header<Props>`
   height: 1.2rem;
@@ -32,13 +32,13 @@ export const CardHeader = styled.header<Props>`
     border: none;
     background-color: transparent;
   }
-`
+`;
 
 export const CardImg = styled.img`
   width: 7.2rem;
   height: 7.2rem;
   margin: 0 auto;
-`
+`;
 
 export const CardFooter = styled.footer<Props>`
   height: 2.4rem;
@@ -47,8 +47,8 @@ export const CardFooter = styled.footer<Props>`
   background-color: ${({ theme, pokemonType }) =>
     theme.pokemonTypeColor[pokemonType]};
   border-radius: 0 0 0.7rem 0.7rem;
-`
+`;
 export const CardBtn = styled.button`
   border: none;
   background-color: transparent;
-`
+`;

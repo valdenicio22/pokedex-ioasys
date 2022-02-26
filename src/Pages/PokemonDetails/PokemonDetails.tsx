@@ -1,30 +1,30 @@
-import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { PokemonType } from '../../components/PokemonType/PokemonType'
-import { Heart } from '../../components/SvgComponents/Heart'
-import { getPokemonByName } from '../../service/api'
-import { PokeInfo } from '../../types/types'
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { PokemonType } from '../../components/PokemonType/PokemonType';
+import { Heart } from '../../components/SvgComponents/Heart';
+import { getPokemonByName } from '../../service/api';
+import { PokeInfo } from '../../types/types';
 
-import weight from '../../assets/weightIcon.svg'
-import ruler from '../../assets/rulerIcon.svg'
+import weight from '../../assets/weightIcon.svg';
+import ruler from '../../assets/rulerIcon.svg';
 
-import * as S from './PokemonDetails.styles'
+import * as S from './PokemonDetails.styles';
 
 export const PokemonDetails = () => {
-  const navigate = useNavigate()
-  const { pokemonName } = useParams()
-  const [pokemon, setPokemon] = useState<PokeInfo>()
+  const navigate = useNavigate();
+  const { pokemonName } = useParams();
+  const [pokemon, setPokemon] = useState<PokeInfo>();
 
   useEffect(() => {
     try {
-      if (!pokemonName) return
+      if (!pokemonName) return;
       getPokemonByName(pokemonName).then((pokemonData) =>
         setPokemon(pokemonData)
-      )
+      );
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }, [])
+  }, []);
 
   return pokemon ? (
     <S.PdContainer pokemonType={pokemon.types[0].type.name}>
@@ -76,5 +76,5 @@ export const PokemonDetails = () => {
     </S.PdContainer>
   ) : (
     <h1>Loading...</h1>
-  )
-}
+  );
+};

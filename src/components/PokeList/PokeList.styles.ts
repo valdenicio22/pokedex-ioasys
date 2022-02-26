@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 export const ListContainer = styled.div`
   max-width: ${({ theme }) => theme.containers.mobile};
@@ -8,4 +8,4 @@ export const ListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: ${({ theme }) => theme.font.sizes.medium};
-`
+`;

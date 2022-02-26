@@ -1,5 +1,5 @@
-import * as S from './TopHeader.styles'
+import * as S from './TopHeader.styles';
 
 export const TopHeader = () => {
-  return <S.TopHeaderContainer />
-}
+  return <S.TopHeaderContainer />;
+};

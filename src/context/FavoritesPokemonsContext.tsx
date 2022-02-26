@@ -1,52 +1,48 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
-import { PokeInfo } from '../types/types'
-import { pokemonTypeColor } from '../utils/pokemons'
+import { createContext, ReactNode, useContext, useState } from 'react';
+import { PokeInfo, PokemonCard } from '../types/types';
 
 type FavoritePokemonsProviderProps = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 type FavoritePokemonsContextData = {
-  favoritesPokemons: PokeInfo[]
-  addPokemonToFavoriteList: (pokemon: PokeInfo) => void
-  toggleFavoritePokemons: (pokemon: PokeInfo) => void
-  removePokemonFromFavoriteList: (pokemonid: PokeInfo['id']) => void
-  checkPokemonOnFavoriteList: (pokemonid: PokeInfo['id']) => boolean
-}
+  favoritesPokemons: PokemonCard[];
+  addPokemonToFavoriteList: (pokemon: PokemonCard) => void;
+  toggleFavoritePokemons: (pokemon: PokemonCard) => void;
+  removePokemonFromFavoriteList: (pokemonId: PokemonCard['id']) => void;
+  checkPokemonOnFavoriteList: (pokemonId: PokemonCard['id']) => boolean;
+};
 
 export const FavoritePokemonsContext =
-  createContext<FavoritePokemonsContextData>({} as FavoritePokemonsContextData)
+  createContext<FavoritePokemonsContextData>({} as FavoritePokemonsContextData);
 
 export const FavoritesPokemonsProvider = (
   props: FavoritePokemonsProviderProps
 ) => {
-  const [favoritesPokemons, setFavoritesPokemons] = useState<PokeInfo[]>([])
+  const [favoritesPokemons, setFavoritesPokemons] = useState<PokemonCard[]>([]);
 
   const checkPokemonOnFavoriteList = (pokemonId: PokeInfo['id']) => {
-    return favoritesPokemons.some((pokemon) => pokemon.id === pokemonId)
-  }
+    return favoritesPokemons.some((pokemon) => pokemon.id === pokemonId);
+  };
 
-  const toggleFavoritePokemons = (pokemon: PokeInfo) => {
-    if (checkPokemonOnFavoriteList(pokemon.id)) {
-      removePokemonFromFavoriteList(pokemon.id)
-    } else {
-      addPokemonToFavoriteList(pokemon)
-    }
-  }
+  const toggleFavoritePokemons = (pokemon: PokemonCard) =>
+    checkPokemonOnFavoriteList(pokemon.id)
+      ? removePokemonFromFavoriteList(pokemon.id)
+      : addPokemonToFavoriteList(pokemon);
 
-  const addPokemonToFavoriteList = (pokemon: PokeInfo) => {
-    if (favoritesPokemons.length >= 12) return alert('Favorite list is full') // Should pass false and the error msg
+  const addPokemonToFavoriteList = (pokemon: PokemonCard) => {
+    if (favoritesPokemons.length >= 12) return alert('Favorite list is full'); // Should pass false and the error msg
 
-    const updatedFavoritePokemonList = [...favoritesPokemons, pokemon]
-    setFavoritesPokemons(updatedFavoritePokemonList)
-  }
+    const updatedFavoritePokemonList = [...favoritesPokemons, pokemon];
+    setFavoritesPokemons(updatedFavoritePokemonList);
+  };
 
-  const removePokemonFromFavoriteList = (pokemonId: PokeInfo['id']) => {
+  const removePokemonFromFavoriteList = (pokemonId: PokemonCard['id']) => {
     const updatedFavoritePokemonList = favoritesPokemons.filter(
       (pokemon) => pokemon.id !== pokemonId
-    )
-    setFavoritesPokemons(updatedFavoritePokemonList)
-  }
+    );
+    setFavoritesPokemons(updatedFavoritePokemonList);
+  };
 
   return (
     <FavoritePokemonsContext.Provider
@@ -60,11 +56,11 @@ export const FavoritesPokemonsProvider = (
     >
       {props.children}
     </FavoritePokemonsContext.Provider>
-  )
-}
+  );
+};
 
 export function useFavoritesPokemons() {
-  const context = useContext(FavoritePokemonsContext)
+  const context = useContext(FavoritePokemonsContext);
 
-  return context
+  return context;
 }

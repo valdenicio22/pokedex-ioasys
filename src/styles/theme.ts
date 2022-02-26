@@ -1,4 +1,4 @@
-import { pokemonTypeColor } from '../utils/pokemons'
+import { pokemonTypeColor } from '../utils/pokemons';
 
 export default {
   border: {
@@ -32,4 +32,4 @@ export default {
   containers: {
     mobile: '34.8rem', //428px - 80 = 348px
   },
-} as const
+} as const;
