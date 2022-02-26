@@ -20,16 +20,14 @@ export const PokeList = () => {
     }
   }, []);
 
-  console.log('pokemons', pokemons);
-
   return (
     <S.ListContainer>
-      {pokemons.map((pokemon) => {
-        const isFavorite = checkPokemonOnFavoriteList(pokemon.id);
+      {pokemons.map((pokemonCard) => {
+        const isFavorite = checkPokemonOnFavoriteList(pokemonCard.id);
         return (
           <PokeCard
-            pokemon={pokemon}
-            key={pokemon.id}
+            key={pokemonCard.id}
+            pokemonCard={pokemonCard}
             isFavorite={isFavorite}
           />
         );

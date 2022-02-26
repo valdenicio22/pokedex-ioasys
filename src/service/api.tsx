@@ -14,7 +14,7 @@ type PokemonTypeList = {
 };
 
 const pokemonImgUrl = (pokemonId: PokemonCard['id']) =>
-  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`;
+  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
 
 const getPokemonTypeList = async (pokemonId: PokemonCard['id']) => {
   const pokemonFormData = await api.get<PokemonTypeList>(

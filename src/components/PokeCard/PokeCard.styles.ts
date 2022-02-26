@@ -2,13 +2,10 @@ import styled from 'styled-components';
 import { pokemonTypeColor } from '../../utils/pokemons';
 
 type Props = {
-  pokemonType: keyof typeof pokemonTypeColor; // melhorar tipo
+  pokemonType: keyof typeof pokemonTypeColor;
 };
 
 export const CardContainer = styled.div<Props>`
-  width: 10.4rem;
-  height: 11.2rem;
-
   display: flex;
   flex-flow: column nowrap;
 
