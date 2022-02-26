@@ -13,16 +13,6 @@ type PokemonTypeList = {
   }>;
 };
 
-/*
-const getPokemonImgList = async (pokemonId: PokemonCard['id']) => {
-  const pokemonImgData = await axios.get<string>(
-    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`
-  );
-  const pokemonImgList = pokemonImgData.data;
-  return pokemonImgList;
-};
-*/
-
 const pokemonImgUrl = (pokemonId: PokemonCard['id']) =>
   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`;
 
@@ -52,38 +42,18 @@ export const getPokemonCardData = async () => {
   const pendingPokemonTypeList = pokemonIdList.map((pokemonId) =>
     getPokemonTypeList(pokemonId)
   );
-  //const pendingPokemonImgList = pokemonIdList.map((pokemonId) =>
-  //  getPokemonImgList(pokemonId)
-  //);
 
   const pokemonTypeList = await Promise.all(pendingPokemonTypeList);
-  //const pokemonImgList = await Promise.all(pendingPokemonImgList);
 
-  const pokemonCard = pokemonIdList.map<PokemonCard>((pokemonId) => ({
+  return pokemonIdList.map<PokemonCard>((pokemonId) => ({
     id: pokemonId,
     name: pokemonBasicInfoList[pokemonId - 1].name, // pokemonId starts from 1
     img: pokemonImgList[pokemonId],
-    type: pokemonTypeList[pokemonId - 1],
+    type: pokemonTypeList[pokemonId],
   }));
-  return pokemonCard.map((card) => card);
 };
 
 export const getPokemonByName = async (pokemonName: PokeInfo['name']) => {
   const response = await api.get<PokeInfo>(`pokemon/${pokemonName}`);
   return response.data;
 };
-
-// const responsePokemonImgList = await Promise.all(
-//   getPokemonImgList(pokemonIdList),
-//   getPokemonTypeList(pokemonIdList)
-// )
-
-// const pokemonCard: PokemonCard[] = pokemonIdList.map((id, index) => {
-//   return {
-//     id: id,
-//     name: pokemonList[index].name,
-//     img: responsePokemonImgList[index].data,
-//   }
-// })
-
-// return pokemonCard.map((Card) => Card)

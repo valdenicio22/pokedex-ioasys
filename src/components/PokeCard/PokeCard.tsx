@@ -23,6 +23,12 @@ export const PokeCard = ({ pokemon, isFavorite }: PokeCardProps) => {
     console.log('Oni-Chan');
   };
 
+  const formattedId = (pokemonId: PokemonCard['id']) => {
+    if (pokemonId < 10) return `#00${pokemonId}`;
+    if (pokemonId < 100) return `#0${pokemonId}`;
+    return `#${pokemonId}`;
+  };
+
   return (
     <S.CardContainer pokemonType={pokemon.type}>
       <S.CardHeader pokemonType={pokemon.type}>
@@ -33,7 +39,7 @@ export const PokeCard = ({ pokemon, isFavorite }: PokeCardProps) => {
             fill={isFavorite ? '#EC0344' : '#FFFFFF'}
           />
         </button>
-        <span>{`#00${pokemon.id}`}</span>
+        <span>{formattedId(pokemon.id)}</span>
       </S.CardHeader>
       <S.CardBtn onClick={() => navigate(`/pokemonDetails/${pokemon.name}`)}>
         <S.CardImg src={pokemon.img} alt={pokemon.name} />
