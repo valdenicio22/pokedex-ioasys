@@ -13,6 +13,7 @@ type PokemonTypeList = {
   }>;
 };
 
+/*
 const getPokemonImgList = async (pokemonId: PokemonCard['id']) => {
   const pokemonImgData = await axios.get<string>(
     `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`
@@ -20,6 +21,10 @@ const getPokemonImgList = async (pokemonId: PokemonCard['id']) => {
   const pokemonImgList = pokemonImgData.data;
   return pokemonImgList;
 };
+*/
+
+const pokemonImgUrl = (pokemonId: PokemonCard['id']) =>
+  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`;
 
 const getPokemonTypeList = async (pokemonId: PokemonCard['id']) => {
   const pokemonFormData = await api.get<PokemonTypeList>(
@@ -35,23 +40,29 @@ export const getPokemonCardData = async () => {
   );
   const pokemonBasicInfoList = responsePokemonNameUrl.data.results;
 
-  let pokemonIdList: PokeInfo['id'][] = [];
-  pokemonBasicInfoList.forEach(
-    (pokemon) => pokemonIdList.push(+pokemon.url.slice(34, -1)) // getting the pokemonId out of the url
-  );
+  let pokemonIdList: PokemonCard['id'][] = [];
+  let pokemonImgList: PokemonCard['img'][] = [];
+  pokemonBasicInfoList.forEach((pokemon) => {
+    let pokemonId = +pokemon.url.slice(34, -1); // getting the pokemonId out of the url
+    if (!pokemonIdList[pokemonId]) pokemonIdList[pokemonId] = pokemonId;
+    if (!pokemonImgList[pokemonId])
+      pokemonImgList[pokemonId] = pokemonImgUrl(pokemonId);
+  });
+
   const pendingPokemonTypeList = pokemonIdList.map((pokemonId) =>
     getPokemonTypeList(pokemonId)
   );
-  const pendingPokemonImgList = pokemonIdList.map((pokemonId) =>
-    getPokemonImgList(pokemonId)
-  );
+  //const pendingPokemonImgList = pokemonIdList.map((pokemonId) =>
+  //  getPokemonImgList(pokemonId)
+  //);
+
   const pokemonTypeList = await Promise.all(pendingPokemonTypeList);
-  const pokemonImgList = await Promise.all(pendingPokemonImgList);
+  //const pokemonImgList = await Promise.all(pendingPokemonImgList);
 
   const pokemonCard = pokemonIdList.map<PokemonCard>((pokemonId) => ({
     id: pokemonId,
     name: pokemonBasicInfoList[pokemonId - 1].name, // pokemonId starts from 1
-    img: pokemonImgList[pokemonId - 1],
+    img: pokemonImgList[pokemonId],
     type: pokemonTypeList[pokemonId - 1],
   }));
   return pokemonCard.map((card) => card);
