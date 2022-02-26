@@ -33,7 +33,7 @@ export const PokeCard = ({ pokemon, isFavorite }: PokeCardProps) => {
             fill={isFavorite ? '#EC0344' : '#FFFFFF'}
           />
         </button>
-        <span>{pokemon.id}</span>
+        <span>{`#00${pokemon.id}`}</span>
       </S.CardHeader>
       <S.CardBtn onClick={() => navigate(`/pokemonDetails/${pokemon.name}`)}>
         <S.CardImg src={pokemon.img} alt={pokemon.name} />
