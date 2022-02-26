@@ -14,7 +14,7 @@ export const PokemonDetails = () => {
   const navigate = useNavigate();
   const { pokemonName } = useParams();
   const [pokemon, setPokemon] = useState<PokeInfo>();
-
+  /*
   useEffect(() => {
     try {
       if (!pokemonName) return;
@@ -25,7 +25,7 @@ export const PokemonDetails = () => {
       console.log(error);
     }
   }, []);
-
+*/
   return pokemon ? (
     <S.PdContainer pokemonType={pokemon.types[0].type.name}>
       <S.PdHeader>
