@@ -1,9 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
-  width: ${(props) => props.theme.containers.mobile};
-  margin: 5rem auto;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,14 +14,7 @@ export const LogoContainer = styled.div`
   gap: 1.3rem;
 
   img {
-    width: 2.4rem;
+    width: 24.9rem;
     height: 3.2rem;
   }
-  ${({ theme }) => css`
-    h1 {
-      font-size: ${theme.font.sizes.xlarge};
-      font-weight: ${theme.font.weight.bold};
-      color: ${theme.colors.primary};
-    }
-  `}
 `;

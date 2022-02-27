@@ -1,9 +1,14 @@
 import axios from 'axios';
-import { PokemonBasicInfo, PokeInfo, PokemonCard } from '../types/types';
+import { PokeInfo, PokemonCard } from '../types/types';
 
 export const api = axios.create({
   baseURL: `https://pokeapi.co/api/v2/`,
 });
+
+type PokemonBasicInfo = {
+  name: string;
+  url: string;
+};
 
 type PokemonCardByName = {
   id: number;
@@ -14,6 +19,7 @@ type PokemonCardByName = {
     };
   }>;
 };
+
 const pokemonImgUrl = (pokemonId: PokemonCard['id']) =>
   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
 
@@ -44,39 +50,3 @@ export const getPokemonCardByName = async (
   };
   return pokemonCard;
 };
-
-/*
-
-return pokemonIdList.map<PokemonCard>((pokemonId) => ({
-    id: pokemonId,
-    name: pokemonBasicInfoList[pokemonId - 1].name, // pokemonId starts from 1
-    img: pokemonImgList[pokemonId],
-    type: pokemonTypeList[pokemonId],
-  }));
-
-const getPokemonTypeList = async (pokemonId: PokemonCard['id']) => {
-  const pokemonFormData = await api.get<PokemonTypeList>(
-    `pokemon-form/${pokemonId}`
-  );
-  const pokemonTypeList = pokemonFormData.data.types[0].type.name;
-  return pokemonTypeList;
-};
-
-const pokemonCard
-  console.log('pendingPokemonFormData', pokemonFormData);
-
-  let pokemonIdList: PokemonCard['id'][] = [];
-  let pokemonImgList: PokemonCard['img'][] = [];
-  pokemonBasicInfoList.forEach((pokemon) => {
-    let pokemonId = +pokemon.url.slice(34, -1); // getting the pokemonId out of the url
-    if (!pokemonIdList[pokemonId]) pokemonIdList[pokemonId] = pokemonId;
-    if (!pokemonImgList[pokemonId])
-      pokemonImgList[pokemonId] = pokemonImgUrl(pokemonId);
-  });
-
-  const pendingPokemonTypeList = pokemonIdList.map((pokemonId) =>
-    getPokemonTypeList(pokemonId)
-  );
-
-  const pokemonTypeList = await Promise.all(pendingPokemonTypeList);
-  */
