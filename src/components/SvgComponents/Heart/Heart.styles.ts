@@ -1,6 +1,9 @@
 import styled from 'styled-components';
-import { LogoProps } from './Heart';
 
-export const Wrapper = styled.div<LogoProps>`
+type HeartProps = {
+  color?: 'primary' | 'white';
+};
+
+export const Wrapper = styled.div<HeartProps>`
   color: ${({ theme, color }) => theme.colors[color!]};
 `;

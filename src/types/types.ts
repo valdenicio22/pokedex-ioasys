@@ -7,7 +7,7 @@ export type PokemonCard = {
   type: keyof typeof pokemonTypeColor;
 };
 
-export type PokeInfo = {
+export type Pokemon = {
   abilities: Array<{
     ability: {
       name: string;

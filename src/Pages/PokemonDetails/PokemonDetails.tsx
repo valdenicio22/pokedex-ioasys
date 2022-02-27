@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PokemonType } from '../../components/PokemonType/PokemonType';
-import { Heart } from '../../components/SvgComponents/Heart';
-import { getPokemonByName } from '../../service/api';
-import { PokeInfo } from '../../types/types';
+import { Heart } from '../../components/SvgComponents/Heart/Heart';
+import { getPokemon } from '../../service/api';
+import { Pokemon } from '../../types/types';
 
 import weight from '../../assets/weightIcon.svg';
 import ruler from '../../assets/rulerIcon.svg';
@@ -13,24 +13,22 @@ import * as S from './PokemonDetails.styles';
 export const PokemonDetails = () => {
   const navigate = useNavigate();
   const { pokemonName } = useParams();
-  const [pokemon, setPokemon] = useState<PokeInfo>();
-  /*
+  const [pokemon, setPokemon] = useState<Pokemon>();
+
   useEffect(() => {
     try {
       if (!pokemonName) return;
-      getPokemonByName(pokemonName).then((pokemonData) =>
-        setPokemon(pokemonData)
-      );
+      getPokemon(pokemonName).then((pokemonData) => console.log(pokemonData));
     } catch (error) {
       console.log(error);
     }
   }, []);
-*/
+
   return pokemon ? (
     <S.PdContainer pokemonType={pokemon.types[0].type.name}>
       <S.PdHeader>
         <div>
-          <Heart width="30" height="30" fill="#EC0344" />
+          <Heart />
           <h2>{pokemonName}</h2>
         </div>
         <span>{pokemon.id}</span>

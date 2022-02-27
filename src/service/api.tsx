@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PokemonType } from '../components/PokemonType/PokemonType';
-import { PokeInfo, PokemonCard } from '../types/types';
+import { Pokemon, PokemonCard } from '../types/types';
 
 export const api = axios.create({
   baseURL: `https://pokeapi.co/api/v2/`,
@@ -50,4 +50,10 @@ export const getPokemonCardByName = async (
     type: response.data.types[0].type.name,
   };
   return pokemonCard;
+};
+
+export const getPokemon = async (pokemonName: Pokemon['name']) => {
+  const response = await api.get<Pokemon>(`pokemon/${pokemonName}`);
+
+  console.log(response);
 };

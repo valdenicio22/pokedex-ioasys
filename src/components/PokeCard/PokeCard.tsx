@@ -1,7 +1,7 @@
 //Types
 import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext';
 import { PokemonCard } from '../../types/types';
-import { Heart } from '../SvgComponents/Heart';
+import { Heart } from '../SvgComponents/Heart/Heart';
 import * as S from './PokeCard.styles';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -28,11 +28,7 @@ export const PokeCard = ({ pokemonCard, isFavorite }: PokeCardProps) => {
     <S.CardContainer pokemonType={pokemonCard.type}>
       <S.CardHeader pokemonType={pokemonCard.type}>
         <button onClick={() => toggleFavoritePokemons(pokemonCard)}>
-          <Heart
-            width={'12'}
-            height={'12'}
-            fill={isFavorite ? '#EC0344' : '#FFFFFF'}
-          />
+          <Heart color={isFavorite ? 'primary' : 'white'} />
         </button>
         <span>{formattedId(pokemonCard.id)}</span>
       </S.CardHeader>
@@ -45,6 +41,5 @@ export const PokeCard = ({ pokemonCard, isFavorite }: PokeCardProps) => {
         </S.CardFooter>
       </S.CardBtn>
     </S.CardContainer>
-    //add type to get the color
   );
 };
