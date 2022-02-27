@@ -9,16 +9,7 @@ import * as S from './PokeList.styles';
 import { PokemonCard } from '../../types/types';
 
 export const PokeList = () => {
-  const [pokemons, setPokemons] = useState<PokemonCard[]>([]);
   const { checkPokemonOnFavoriteList } = useFavoritesPokemons();
-
-  useEffect(() => {
-    try {
-      getPokemonCardData().then((pokemonCard) => setPokemons(pokemonCard));
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
 
   return (
     <S.ListContainer>

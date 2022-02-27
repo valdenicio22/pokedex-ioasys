@@ -27,8 +27,8 @@ export const getPokemonBasicInfo = async (limit: number) => {
   return pokemonBasicInfoList;
 };
 
-export const getPokemonCardData = async () => {
-  const pokemonBasicInfoList = await getPokemonBasicInfo(20);
+export const getPokemonCardData = async (limit: number) => {
+  const pokemonBasicInfoList = await getPokemonBasicInfo(limit);
 
   const pendingPokemonCard = pokemonBasicInfoList.map((pokemonNameUrl) =>
     getPokemonCardByName(pokemonNameUrl.name)

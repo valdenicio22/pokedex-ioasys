@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import * as S from './Search.styles';
 
@@ -7,30 +7,56 @@ import TextField from '@mui/material/TextField';
 
 import { useNavigate } from 'react-router-dom';
 import { Heart } from '../SvgComponents/Heart/Heart';
-import { getPokemonCardData, getPokemonBasicInfo } from '../../service/api';
-import { PokemonBasicInfo } from '../../types/types';
+import { getPokemonCardByName, getPokemonBasicInfo } from '../../service/api';
+import { PokemonBasicInfo, PokemonCard } from '../../types/types';
+
+import { useDebounce } from '../../hooks/useDebounce';
 
 export const Search = () => {
+  const MAX_POKEMONS_API = 100; //926
+  const itWasFocus = useRef(false);
+
   const navigate = useNavigate();
 
   const [pokemonsName, setPokemonsName] = useState<PokemonBasicInfo['name'][]>(
     []
   );
 
+  const [inputSearch, setInputSearch] = useState('');
+  const debouncedInputSearch = useDebounce({ value: inputSearch, delay: 500 });
+
+  const [filteredPokemonsCard, setFilteredPokemonsCard] = useState<
+    PokemonCard[]
+  >([]);
+
   const handleInputFocus = () => {
-    const responsePokemonBasicInfo = getPokemonBasicInfo(500).then(
-      (response) => response
+    if (itWasFocus.current) return;
+    getPokemonBasicInfo(MAX_POKEMONS_API).then((response) =>
+      setPokemonsName(response.map(({ name }) => name))
     );
-    console.log(responsePokemonBasicInfo);
+    itWasFocus.current = true;
   };
+
+  useEffect(() => {
+    const filteredPokemonsByName = pokemonsName.filter(
+      (pokemonName) =>
+        pokemonName.includes(debouncedInputSearch.toLowerCase()) && pokemonName
+    );
+
+    filteredPokemonsByName.map((pokemonName) => {
+      getPokemonCardByName(pokemonName).then((response) =>
+        setFilteredPokemonsCard([...filteredPokemonsCard, response])
+      );
+    });
+  }, [debouncedInputSearch]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     if (!inputValue) return alert('Digite alguma coisa');
-    const filteredPokemonsInputValue = pokemonsName.filter((pokemonName) =>
-      pokemonName.includes(inputValue)
-    );
+    setInputSearch(inputValue);
   };
+
+  console.log(filteredPokemonsCard);
 
   return (
     <S.SearchContainer>
@@ -41,6 +67,7 @@ export const Search = () => {
         color={'primary'}
         onFocus={handleInputFocus}
         onChange={handleChange}
+        value={inputSearch}
       />
       <S.BtnFavorites type="button" onClick={() => navigate('/favorites')}>
         <Heart />

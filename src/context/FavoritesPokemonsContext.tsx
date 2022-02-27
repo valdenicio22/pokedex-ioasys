@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
-import { PokeInfo, PokemonCard } from '../types/types';
+import { PokemonCard } from '../types/types';
 
 type FavoritePokemonsProviderProps = {
   children: ReactNode;
@@ -21,7 +21,7 @@ export const FavoritesPokemonsProvider = (
 ) => {
   const [favoritesPokemons, setFavoritesPokemons] = useState<PokemonCard[]>([]);
 
-  const checkPokemonOnFavoriteList = (pokemonId: PokeInfo['id']) => {
+  const checkPokemonOnFavoriteList = (pokemonId: PokemonCard['id']) => {
     return favoritesPokemons.some((pokemon) => pokemon.id === pokemonId);
   };
 
