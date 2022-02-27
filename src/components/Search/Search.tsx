@@ -1,26 +1,46 @@
+import { ChangeEvent, useState } from 'react';
+
 import * as S from './Search.styles';
+
+import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+
 import { useNavigate } from 'react-router-dom';
 import { Heart } from '../SvgComponents/Heart/Heart';
-
-const top100Films = [
-  { label: 'The Shawshank Redemption', year: 1994 },
-  { label: 'The Godfather', year: 1972 },
-  { label: 'The Godfather: Part II', year: 1974 },
-];
+import { getPokemonCardData, getPokemonBasicInfo } from '../../service/api';
+import { PokemonBasicInfo } from '../../types/types';
 
 export const Search = () => {
   const navigate = useNavigate();
 
+  const [pokemonsName, setPokemonsName] = useState<PokemonBasicInfo['name'][]>(
+    []
+  );
+
+  const handleInputFocus = () => {
+    const responsePokemonBasicInfo = getPokemonBasicInfo(500).then(
+      (response) => response
+    );
+    console.log(responsePokemonBasicInfo);
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    if (!inputValue) return alert('Digite alguma coisa');
+    const filteredPokemonsInputValue = pokemonsName.filter((pokemonName) =>
+      pokemonName.includes(inputValue)
+    );
+  };
+
   return (
     <S.SearchContainer>
-      <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        options={top100Films}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Movie" />}
+      <TextField
+        id="demo-helper-text-misaligned-no-helper"
+        label="Digite o nome do Pokemon..."
+        //autoComplete={pokemonsName}
+        color={'primary'}
+        onFocus={handleInputFocus}
+        onChange={handleChange}
       />
       <S.BtnFavorites type="button" onClick={() => navigate('/favorites')}>
         <Heart />

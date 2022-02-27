@@ -1,5 +1,10 @@
 import { pokemonTypeColor } from '../utils/pokemons';
 
+export type PokemonBasicInfo = {
+  name: string;
+  url: string;
+};
+
 export type PokemonCard = {
   id: number;
   name: string;

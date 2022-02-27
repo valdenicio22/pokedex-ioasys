@@ -1,15 +1,10 @@
 import axios from 'axios';
 import { PokemonType } from '../components/PokemonType/PokemonType';
-import { Pokemon, PokemonCard } from '../types/types';
+import { Pokemon, PokemonCard, PokemonBasicInfo } from '../types/types';
 
 export const api = axios.create({
   baseURL: `https://pokeapi.co/api/v2/`,
 });
-
-type PokemonBasicInfo = {
-  name: string;
-  url: string;
-};
 
 type PokemonCardByName = {
   id: number;
@@ -24,11 +19,16 @@ type PokemonCardByName = {
 const pokemonImgUrl = (pokemonId: PokemonCard['id']) =>
   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
 
-export const getPokemonCardData = async () => {
+export const getPokemonBasicInfo = async (limit: number) => {
   const responsePokemonNameUrl = await api.get<{ results: PokemonBasicInfo[] }>(
-    'pokemon?limit=20&offset=0'
+    `pokemon?limit=${limit}&offset=0`
   );
   const pokemonBasicInfoList = responsePokemonNameUrl.data.results;
+  return pokemonBasicInfoList;
+};
+
+export const getPokemonCardData = async () => {
+  const pokemonBasicInfoList = await getPokemonBasicInfo(20);
 
   const pendingPokemonCard = pokemonBasicInfoList.map((pokemonNameUrl) =>
     getPokemonCardByName(pokemonNameUrl.name)

@@ -14,8 +14,6 @@ export const PokeCard = ({ pokemonCard, isFavorite }: PokeCardProps) => {
   const navigate = useNavigate();
   const { pokemonName } = useParams();
 
-  console.log(pokemonCard);
-
   const { toggleFavoritePokemons } = useFavoritesPokemons();
 
   const formattedId = (pokemonId: PokemonCard['id']) => {
