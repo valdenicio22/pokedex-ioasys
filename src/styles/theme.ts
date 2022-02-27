@@ -31,5 +31,6 @@ export default {
   pokemonTypeColor,
   containers: {
     mobile: '34.8rem', //428px - 80 = 348px
+    desktop: '65rem', //650px
   },
 } as const;

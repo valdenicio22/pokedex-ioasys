@@ -1,8 +1,8 @@
 import * as S from './Search.styles';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Heart } from '../SvgComponents/Heart';
 import { useNavigate } from 'react-router-dom';
+import { Heart } from '../SvgComponents/Heart/Heart';
 
 const top100Films = [
   { label: 'The Shawshank Redemption', year: 1994 },
@@ -23,7 +23,7 @@ export const Search = () => {
         renderInput={(params) => <TextField {...params} label="Movie" />}
       />
       <S.BtnFavorites type="button" onClick={() => navigate('/favorites')}>
-        <Heart width={'30'} height={'30'} fill={'#EC0344'} />
+        <Heart />
       </S.BtnFavorites>
     </S.SearchContainer>
   );
