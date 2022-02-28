@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { TopHeader } from '../../components/TopHeader/TopHeader';
 import { Header } from '../../components/Header/Header';
 import { Search } from '../../components/Search/Search';
-import { PokeList } from '../../components/PokeList/PokeList';
+import { PokemonsList } from '../../components/PokemonsList/PokemonsList';
 //Styles
 import * as S from './Home.styles';
 //Types
@@ -13,11 +13,13 @@ import { PokemonCard } from '../../types/types';
 import { getPokemonCardData } from '../../service/api';
 
 export const Home = () => {
-  const [pokemonCardList, setPokemonCardList] = useState<PokemonCard[]>([]);
+  const [pokemonsListData, setPokemonsListData] = useState<PokemonCard[]>([]);
 
   useEffect(() => {
     try {
-      getPokemonCardData().then((pokemonCard) => setPokemonCardList(pokemonCard));
+      getPokemonCardData(20).then((pokemonCard) =>
+        setPokemonsListData(pokemonCard)
+      );
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +31,7 @@ export const Home = () => {
       <S.HomeContainer>
         <Header />
         <Search />
-        <PokeList pokemons={}/>
+        <PokemonsList pokemonsListData={pokemonsListData} />
       </S.HomeContainer>
     </>
   );

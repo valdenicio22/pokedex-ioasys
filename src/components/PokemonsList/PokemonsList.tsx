@@ -3,17 +3,21 @@ import { getPokemonCardData } from '../../service/api';
 import { PokeCard } from '../PokeCard/PokeCard';
 import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext';
 
-import * as S from './PokeList.styles';
+import * as S from './PokemonsList.styles';
 
 //Types
 import { PokemonCard } from '../../types/types';
 
-export const PokeList = () => {
+type pokemonsListDataProps = {
+  pokemonsListData: PokemonCard[];
+};
+
+export const PokemonsList = ({ pokemonsListData }: pokemonsListDataProps) => {
   const { checkPokemonOnFavoriteList } = useFavoritesPokemons();
 
   return (
     <S.ListContainer>
-      {pokemons.map((pokemonCard) => {
+      {pokemonsListData.map((pokemonCard) => {
         const isFavorite = checkPokemonOnFavoriteList(pokemonCard.id);
         return (
           <PokeCard

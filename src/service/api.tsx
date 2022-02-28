@@ -29,6 +29,10 @@ export const getPokemonBasicInfo = async (limit: number) => {
 
 export const getPokemonCardData = async (limit: number) => {
   const pokemonBasicInfoList = await getPokemonBasicInfo(limit);
+  const pokemonsIdList = pokemonBasicInfoList.map(
+    (pokemonNameUrl) => pokemonNameUrl.url.slice(34, -1) //Getting the id of each pokemon out of the correspondent pokemon url
+  );
+  console.log('pokemonsIdList', pokemonsIdList);
 
   const pendingPokemonCard = pokemonBasicInfoList.map((pokemonNameUrl) =>
     getPokemonCardByName(pokemonNameUrl.name)
