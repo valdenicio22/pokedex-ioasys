@@ -3,7 +3,7 @@ import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext';
 import { PokemonCard } from '../../types/types';
 import { Heart } from '../SvgComponents/Heart/Heart';
 import * as S from './PokeCard.styles';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { formatId } from '../../utils/formatPokemon';
 
 type PokeCardProps = {
@@ -12,6 +12,7 @@ type PokeCardProps = {
 };
 
 export const PokeCard = ({ pokemonCard, isFavorite }: PokeCardProps) => {
+  let navigate = useNavigate();
   const { id, name, img, type } = pokemonCard;
 
   const { toggleFavoritePokemons } = useFavoritesPokemons();
@@ -24,10 +25,17 @@ export const PokeCard = ({ pokemonCard, isFavorite }: PokeCardProps) => {
         </button>
         <span>{formatId(id)}</span>
       </S.CardHeader>
-      <S.CardImg src={img} alt={name} />
-      {/* <Link to={`/pokemonDetails/${name}`}> */}
-      <S.CardFooter pokemonType={type}>{name}</S.CardFooter>
-      {/* </Link> */}
+      <S.CardImg
+        src={img}
+        alt={name}
+        onClick={() => navigate(`/pokemonDetails/${name}`)}
+      />
+      <S.CardFooter
+        pokemonType={type}
+        onClick={() => navigate(`/pokemonDetails/${name}`)}
+      >
+        {name}
+      </S.CardFooter>
     </S.CardContainer>
   );
 };

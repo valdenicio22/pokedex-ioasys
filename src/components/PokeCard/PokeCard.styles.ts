@@ -45,6 +45,7 @@ export const CardImg = styled.img`
   width: 7.2rem;
   height: 7.2rem;
   margin: 0 auto;
+  cursor: pointer;
 `;
 
 export const CardFooter = styled.footer<Props>`
@@ -55,9 +56,6 @@ export const CardFooter = styled.footer<Props>`
     color: ${theme.colors.white};
     background-color: ${theme.pokemonTypeColor[pokemonType]};
     border-radius: 0 0 0.7rem 0.7rem;
+    cursor: pointer;
   `}
-`;
-export const CardBtn = styled.button`
-  border: none;
-  background-color: transparent;
 `;
