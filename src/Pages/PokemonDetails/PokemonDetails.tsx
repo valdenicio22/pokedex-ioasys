@@ -5,13 +5,11 @@ import { Heart } from '../../components/SvgComponents/Heart/Heart';
 import { getPokemonDataByName } from '../../service/api';
 import { Pokemon } from '../../types/types';
 
-import weight from '../../assets/weightIcon.svg';
-import ruler from '../../assets/rulerIcon.svg';
-
 import * as S from './PokemonDetails.styles';
 import { WeightIcon } from '../../components/SvgComponents/WeightIcon/WeightIcon';
 import { RulerIcon } from '../../components/SvgComponents/RulerIcon/RulerIcon';
 import { ReturnArrowIcon } from '../../components/SvgComponents/ReturnArrowIcon/ReturnArrowIcon';
+import { formatId } from '../../utils/formatPokemon';
 
 export const PokemonDetails = () => {
   const navigate = useNavigate();
@@ -34,25 +32,21 @@ export const PokemonDetails = () => {
   const { abilities, height, id, name, sprites, stats, types, weight, about } =
     pokemon;
   return (
-    <S.PdContainer pokemonType={types[0].type.name}>
-      <S.PdHeader>
+    <S.Wrapper pokemonType={types[0].type.name}>
+      <S.HeaderContainer>
         <div>
           <Heart />
           <h2>{name}</h2>
         </div>
-        <span>{id}</span>
-      </S.PdHeader>
-
-      <S.PdMain>
-        <img
-          src={sprites.other['official-artwork'].front_default}
-          alt={name}
-          width="200px"
-          height="200px"
-        />
+        <span>{formatId(id)}</span>
+      </S.HeaderContainer>
+      <S.ImgContainer>
+        <img src={sprites.other['official-artwork'].front_default} alt={name} />
+      </S.ImgContainer>
+      <S.Main>
         <div className="types">
-          {types.map((type) => (
-            <PokemonType typeName={type.type.name} />
+          {types.map(({ type }) => (
+            <PokemonType typeName={type.name} />
           ))}
         </div>
         <div className="Peso-Altura-abilidades">
@@ -77,11 +71,11 @@ export const PokemonDetails = () => {
             </div>
           </div>
         </div>
-      </S.PdMain>
+      </S.Main>
 
       <Link to="/">
         <ReturnArrowIcon />
       </Link>
-    </S.PdContainer>
+    </S.Wrapper>
   );
 };
