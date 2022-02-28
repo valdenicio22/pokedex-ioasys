@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { PokemonType } from '../../components/PokemonType/PokemonType';
 import { Heart } from '../../components/SvgComponents/Heart/Heart';
-import { getPokemon } from '../../service/api';
+import { getPokemonDataByName } from '../../service/api';
 import { Pokemon } from '../../types/types';
 
 import weight from '../../assets/weightIcon.svg';
 import ruler from '../../assets/rulerIcon.svg';
 
 import * as S from './PokemonDetails.styles';
+import { WeightIcon } from '../../components/SvgComponents/WeightIcon/WeightIcon';
+import { RulerIcon } from '../../components/SvgComponents/RulerIcon/RulerIcon';
+import { ReturnArrowIcon } from '../../components/SvgComponents/ReturnArrowIcon/ReturnArrowIcon';
 
 export const PokemonDetails = () => {
   const navigate = useNavigate();
@@ -18,48 +21,54 @@ export const PokemonDetails = () => {
   useEffect(() => {
     try {
       if (!pokemonName) return;
-      getPokemon(pokemonName).then((pokemonData) => console.log(pokemonData));
+      getPokemonDataByName(pokemonName).then((pokemonData) =>
+        setPokemon(pokemonData)
+      );
     } catch (error) {
       console.log(error);
     }
   }, []);
 
-  return pokemon ? (
-    <S.PdContainer pokemonType={pokemon.types[0].type.name}>
+  if (!pokemon) return <h1>Loadinng ...</h1>;
+
+  const { abilities, height, id, name, sprites, stats, types, weight, about } =
+    pokemon;
+  return (
+    <S.PdContainer pokemonType={types[0].type.name}>
       <S.PdHeader>
         <div>
           <Heart />
-          <h2>{pokemonName}</h2>
+          <h2>{name}</h2>
         </div>
-        <span>{pokemon.id}</span>
+        <span>{id}</span>
       </S.PdHeader>
 
       <S.PdMain>
         <img
-          src={pokemon.sprites.other['official-artwork'].front_default}
-          alt={pokemon.name}
+          src={sprites.other['official-artwork'].front_default}
+          alt={name}
           width="200px"
           height="200px"
         />
         <div className="types">
-          {pokemon.types.map((type) => (
+          {types.map((type) => (
             <PokemonType typeName={type.type.name} />
           ))}
         </div>
         <div className="Peso-Altura-abilidades">
           <div>
             <div>
-              <img src={weight} alt="Weight Icon" />
-              <p>{pokemon.weight}</p>
+              <WeightIcon />
+              <p>{weight}</p>
               <span>Weight</span>
             </div>
             <div>
-              <img src={ruler} alt="Ruler Icon" />
-              <p>{pokemon.height}</p>
+              <RulerIcon />
+              <p>{height}</p>
               <span>Height</span>
             </div>
             <div>
-              {pokemon.abilities.map((ability) => (
+              {abilities.map((ability) => (
                 <p>{ability.ability.name}</p>
               ))}
               <span>Abilities</span>
@@ -70,9 +79,9 @@ export const PokemonDetails = () => {
         </div>
       </S.PdMain>
 
-      <button onClick={() => navigate('/')}>voltar</button>
+      <Link to="/">
+        <ReturnArrowIcon />
+      </Link>
     </S.PdContainer>
-  ) : (
-    <h1>Loading...</h1>
   );
 };

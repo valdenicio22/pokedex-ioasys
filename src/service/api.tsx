@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { PokemonType } from '../components/PokemonType/PokemonType';
 import { Pokemon, PokemonCard, PokemonBasicInfo } from '../types/types';
-import { getPokemonsIdByUrl } from '../utils/getPOkemonIdByUrl';
+import { getPokemonsIdByUrl } from '../utils/getPokemonsIdByUrl';
 
 export const api = axios.create({
   baseURL: `https://pokeapi.co/api/v2/`,
@@ -30,26 +30,31 @@ export const getPokemonBasicInfo = async (limit: number) => {
 
 export const getPokemonCardData = async (limit: number) => {
   const pokemonBasicInfoList = await getPokemonBasicInfo(limit);
-  const pokemonsIdList = getPokemonsIdByUrl({ pokemonBasicInfoList });
+  const pokemonsIdList = getPokemonsIdByUrl(pokemonBasicInfoList);
 
   const pendingPokemonCardInfo = pokemonsIdList.map((pokemonId) =>
-    getPokemonCardInfoById(pokemonId)
+    getPokemonCardDataById(pokemonId)
   );
   const pokemonCard = await Promise.all(pendingPokemonCardInfo);
   return pokemonCard;
 };
 
-export const getPokemonCardInfoById = async (pokemonId: PokemonCard['id']) => {
+export const getPokemonCardDataById = async (pokemonId: PokemonCard['id']) => {
   const response = await api.get<PokemonCardInfoById>(
     `pokemon-form/${pokemonId}`
   );
-  const pokemonCardInfo = {
+  const pokemonCardData = {
     id: response.data.id,
     name: response.data.name,
     img: pokemonImgUrl(response.data.id),
     type: response.data.types[0].type.name,
   };
-  return pokemonCardInfo;
+  return pokemonCardData;
+};
+
+export const getPokemonDataByName = async (pokemonName: Pokemon['name']) => {
+  const response = await api.get<Pokemon>(`pokemon/${pokemonName}`);
+  return response.data;
 };
 
 /* Can't fetch all pokemons by name, a few bad requests through this endPoint -> `pokemon-form/${pokemonName}` 

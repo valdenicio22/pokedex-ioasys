@@ -1,17 +1,20 @@
-import * as S from './Header.styles';
-import Switch from '@mui/material/Switch';
+//Hooks
 import { useState } from 'react';
-import logo from '../../assets/logo.svg';
-import logoIoasys from '../../assets/logoIoasys.svg';
+//Components Material Ui
+import Switch from '@mui/material/Switch';
+//Styles
+import * as S from './Header.styles';
+import { Logo } from '../SvgComponents/Logo/Logo';
 
 export const Header = () => {
   const [checked, setChecked] = useState(false);
 
   return (
     <S.HeaderContainer>
-      <S.LogoContainer>
+      <Logo />
+      {/* <S.LogoContainer>
         <img src={logoIoasys} alt="Logo Ioasys" />
-      </S.LogoContainer>
+      </S.LogoContainer> */}
 
       <Switch checked={checked} onChange={() => setChecked(!checked)} />
     </S.HeaderContainer>

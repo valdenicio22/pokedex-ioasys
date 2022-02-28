@@ -3,7 +3,8 @@ import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext';
 import { PokemonCard } from '../../types/types';
 import { Heart } from '../SvgComponents/Heart/Heart';
 import * as S from './PokeCard.styles';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import { formatId } from '../../utils/formatPokemon';
 
 type PokeCardProps = {
   pokemonCard: PokemonCard;
@@ -11,33 +12,26 @@ type PokeCardProps = {
 };
 
 export const PokeCard = ({ pokemonCard, isFavorite }: PokeCardProps) => {
-  const navigate = useNavigate();
-  const { pokemonName } = useParams();
+  const { id, name, img, type } = pokemonCard;
+  // const navigate = useNavigate();
+  // const { pokemonName } = useParams();
 
   const { toggleFavoritePokemons } = useFavoritesPokemons();
 
-  const formattedId = (pokemonId: PokemonCard['id']) => {
-    if (pokemonId < 10) return `#00${pokemonId}`;
-    if (pokemonId < 100) return `#0${pokemonId}`;
-    return `#${pokemonId}`;
-  };
-
   return (
-    <S.CardContainer pokemonType={pokemonCard.type}>
-      <S.CardHeader pokemonType={pokemonCard.type}>
+    <S.CardContainer pokemonType={type}>
+      <S.CardHeader pokemonType={type}>
         <button onClick={() => toggleFavoritePokemons(pokemonCard)}>
           <Heart color={isFavorite ? 'primary' : 'white'} />
         </button>
-        <span>{formattedId(pokemonCard.id)}</span>
+        <span>{formatId(id)}</span>
       </S.CardHeader>
-      <S.CardBtn
-        onClick={() => navigate(`/pokemonDetails/${pokemonCard.name}`)}
-      >
-        <S.CardImg src={pokemonCard.img} alt={pokemonCard.name} />
-        <S.CardFooter pokemonType={pokemonCard.type}>
-          {pokemonCard.name}
-        </S.CardFooter>
-      </S.CardBtn>
+      <Link to={`/pokemonDetails/${name}`}>
+        <S.CardBtn>
+          <S.CardImg src={img} alt={name} />
+          <S.CardFooter pokemonType={type}>{name}</S.CardFooter>
+        </S.CardBtn>
+      </Link>
     </S.CardContainer>
   );
 };

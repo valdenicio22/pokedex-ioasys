@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
-import { getPokemonCardData } from '../../service/api';
+//components
 import { PokeCard } from '../PokeCard/PokeCard';
+//context
 import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext';
-
+//styles
 import * as S from './PokemonsList.styles';
-
 //Types
 import { PokemonCard } from '../../types/types';
 
