@@ -29,8 +29,8 @@ export type Pokemon = {
     };
   };
   stats: Array<{
-    baseStat: number;
-    Stat: {
+    base_stat: number;
+    stat: {
       name: string;
     };
   }>;
@@ -41,4 +41,16 @@ export type Pokemon = {
   }>;
   weight: number;
   about?: string;
+};
+
+export type FormattedPokemon = {
+  id: string;
+  name: string;
+  height: string;
+  weight: string;
+  about?: string;
+  img: string;
+  abilities: string[];
+  stats: Record<string, number>;
+  types: Array<keyof typeof pokemonTypeColor>; // ajeitar
 };

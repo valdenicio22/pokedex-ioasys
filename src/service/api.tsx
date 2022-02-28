@@ -7,7 +7,7 @@ export const api = axios.create({
   baseURL: `https://pokeapi.co/api/v2/`,
 });
 
-type PokemonCardInfoById = {
+type PokemonCardDataById = {
   id: number;
   name: string;
   types: Array<{
@@ -40,7 +40,7 @@ export const getPokemonCardData = async (limit: number) => {
 };
 
 export const getPokemonCardDataById = async (pokemonId: PokemonCard['id']) => {
-  const response = await api.get<PokemonCardInfoById>(
+  const response = await api.get<PokemonCardDataById>(
     `pokemon-form/${pokemonId}`
   );
   const pokemonCardData = {
@@ -57,30 +57,4 @@ export const getPokemonDataByName = async (pokemonName: Pokemon['name']) => {
   return response.data;
 };
 
-/* Can't fetch all pokemons by name, a few bad requests through this endPoint -> `pokemon-form/${pokemonName}` 
-
-  const pendingPokemonCard = pokemonBasicInfoList.map((pokemonNameUrl) =>
-    getPokemonCardByName(pokemonNameUrl.name)
-  );
-
-export const getPokemonCardByName = async (
-  pokemonName: PokemonCard['name']
-) => {
-  const response = await api.get<PokemonCardByName>(
-    `pokemon-form/${pokemonName}`
-  );
-  const pokemonCard = {
-    id: response.data.id,
-    name: response.data.name,
-    img: pokemonImgUrl(response.data.id),
-    type: response.data.types[0].type.name,
-  };
-  return pokemonCard;
-};
-
-export const getPokemon = async (pokemonName: Pokemon['name']) => {
-  const response = await api.get<Pokemon>(`pokemon/${pokemonName}`);
-
-  console.log(response);
-}
-*/
+/* Can't fetch all pokemons by name, a few bad requests through this endPoint -> `pokemon-form/${pokemonName}` */

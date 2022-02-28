@@ -1,10 +1,15 @@
-//Types
+//Context
 import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext';
-import { PokemonCard } from '../../types/types';
+//Svg Components
 import { Heart } from '../SvgComponents/Heart/Heart';
-import * as S from './PokeCard.styles';
+//React-Router-Dom
 import { useNavigate } from 'react-router-dom';
+//Styled-Components
+import * as S from './PokeCard.styles';
+//Utils
 import { formatId } from '../../utils/formatPokemon';
+//Types
+import { PokemonCard } from '../../types/types';
 
 type PokeCardProps = {
   pokemonCard: PokemonCard;

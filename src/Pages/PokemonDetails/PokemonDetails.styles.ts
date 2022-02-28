@@ -9,7 +9,7 @@ type Props = {
 export const Wrapper = styled.div<Props>`
   width: 42.8rem;
   padding: 1.6rem 0.8rem;
-  height: 100vh;
+  height: 100%;
 
   background-color: ${({ theme, pokemonType }) =>
     theme.pokemonTypeColor[pokemonType]};
@@ -72,6 +72,7 @@ export const TypesContainer = styled.div`
   flex-wrap: wrap;
 
   padding: 3rem 0;
+  text-transform: capitalize;
 `;
 
 export const DetailsContainer = styled.div`
@@ -86,6 +87,10 @@ export const DetailsContent = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+
+  span {
+    font-size: 1.2rem;
+  }
 
   p {
     font-size: 1.2rem;

@@ -3,24 +3,24 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { PokemonType } from '../../components/PokemonType/PokemonType';
 import { Heart } from '../../components/SvgComponents/Heart/Heart';
 import { getPokemonDataByName } from '../../service/api';
-import { Pokemon } from '../../types/types';
+import { FormattedPokemon } from '../../types/types';
 
 import * as S from './PokemonDetails.styles';
 import { WeightIcon } from '../../components/SvgComponents/WeightIcon/WeightIcon';
 import { RulerIcon } from '../../components/SvgComponents/RulerIcon/RulerIcon';
 import { ReturnArrowIcon } from '../../components/SvgComponents/ReturnArrowIcon/ReturnArrowIcon';
-import { formatId } from '../../utils/formatPokemon';
+import { formartPokemon } from '../../utils/formatPokemon';
 
 export const PokemonDetails = () => {
   const navigate = useNavigate();
   const { pokemonName } = useParams();
-  const [pokemon, setPokemon] = useState<Pokemon>();
+  const [pokemon, setPokemon] = useState<FormattedPokemon>();
 
   useEffect(() => {
     try {
       if (!pokemonName) return;
       getPokemonDataByName(pokemonName).then((pokemonData) =>
-        setPokemon(pokemonData)
+        setPokemon(formartPokemon(pokemonData))
       );
     } catch (error) {
       console.log(error);
@@ -29,25 +29,25 @@ export const PokemonDetails = () => {
 
   if (!pokemon) return <h1>Loadinng ...</h1>;
 
-  const { abilities, height, id, name, sprites, stats, types, weight, about } =
+  const { id, img, abilities, height, name, stats, types, weight, about } =
     pokemon;
   return (
-    <S.Wrapper pokemonType={types[0].type.name}>
+    <S.Wrapper pokemonType={types[0]}>
       <S.HeaderContainer>
         <div>
-          <Heart />
+          <Heart size={20} color={'white'} /> //Passar prop
           <h2>{name}</h2>
         </div>
-        <span>{formatId(id)}</span>
+        <span>{id}</span>
       </S.HeaderContainer>
       <S.ImgContainer>
-        <img src={sprites.other['official-artwork'].front_default} alt={name} />
+        <img src={img} alt={name} />
       </S.ImgContainer>
       <S.Main>
         <S.MainContent>
           <S.TypesContainer>
-            {types.map(({ type }) => (
-              <PokemonType typeName={type.name} />
+            {types.map((type) => (
+              <PokemonType typeName={type} />
             ))}
           </S.TypesContainer>
           <S.DetailsContainer>
@@ -63,7 +63,7 @@ export const PokemonDetails = () => {
             </S.DetailsContent>
             <S.DetailsContent>
               {abilities.map((ability) => (
-                <span>{ability.ability.name}</span>
+                <span>{ability}</span>
               ))}
 
               <div className="abilities">
