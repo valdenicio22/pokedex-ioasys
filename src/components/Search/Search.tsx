@@ -7,60 +7,60 @@ import TextField from '@mui/material/TextField';
 
 import { useNavigate } from 'react-router-dom';
 import { Heart } from '../SvgComponents/Heart/Heart';
-import { getPokemonCardByName, getPokemonBasicInfo } from '../../service/api';
+import { getPokemonCardInfoById, getPokemonBasicInfo } from '../../service/api';
 import { PokemonBasicInfo, PokemonCard } from '../../types/types';
 
 import { useDebounce } from '../../hooks/useDebounce';
 
 export const Search = () => {
-  const MAX_POKEMONS_API = 100; //926
-  const itWasFocus = useRef(false);
+  // const MAX_POKEMONS_API = 100; //926
+  // const itWasFocus = useRef(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const [pokemonsName, setPokemonsName] = useState<PokemonBasicInfo['name'][]>(
-    []
-  );
+  // const [pokemonsName, setPokemonsName] = useState<PokemonBasicInfo['name'][]>(
+  //   []
+  // );
 
-  const [inputSearch, setInputSearch] = useState('');
-  const debouncedInputSearch = useDebounce({ value: inputSearch, delay: 500 });
+  // const [inputSearch, setInputSearch] = useState('');
+  // const debouncedInputSearch = useDebounce({ value: inputSearch, delay: 500 });
 
-  const [filteredPokemonsCard, setFilteredPokemonsCard] = useState<
-    PokemonCard[]
-  >([]);
+  // const [filteredPokemonsCard, setFilteredPokemonsCard] = useState<
+  //   PokemonCard[]
+  // >([]);
 
-  const handleInputFocus = () => {
-    if (itWasFocus.current) return;
-    getPokemonBasicInfo(MAX_POKEMONS_API).then((response) =>
-      setPokemonsName(response.map(({ name }) => name))
-    );
-    itWasFocus.current = true;
-  };
+  // const handleInputFocus = () => {
+  //   if (itWasFocus.current) return;
+  //   getPokemonBasicInfo(MAX_POKEMONS_API).then((response) =>
+  //     setPokemonsName(response.map(({ name }) => name))
+  //   );
+  //   itWasFocus.current = true;
+  // };
 
-  useEffect(() => {
-    const filteredPokemonsByName = pokemonsName.filter(
-      (pokemonName) =>
-        pokemonName.includes(debouncedInputSearch.toLowerCase()) && pokemonName
-    );
+  // useEffect(() => {
+  //   const filteredPokemonsByName = pokemonsName.filter(
+  //     (pokemonName) =>
+  //       pokemonName.includes(debouncedInputSearch.toLowerCase()) && pokemonName
+  //   );
 
-    filteredPokemonsByName.map((pokemonName) => {
-      getPokemonCardByName(pokemonName).then((response) =>
-        setFilteredPokemonsCard([...filteredPokemonsCard, response])
-      );
-    });
-  }, [debouncedInputSearch]);
+  //   filteredPokemonsByName.map((pokemonName) => {
+  //     getPokemonCardByName(pokemonName).then((response) =>
+  //       setFilteredPokemonsCard([...filteredPokemonsCard, response])
+  //     );
+  //   });
+  // }, [debouncedInputSearch]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    if (!inputValue) return alert('Digite alguma coisa');
-    setInputSearch(inputValue);
-  };
+  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const inputValue = e.target.value;
+  //   if (!inputValue) return alert('Digite alguma coisa');
+  //   setInputSearch(inputValue);
+  // };
 
-  console.log(filteredPokemonsCard);
+  // console.log(filteredPokemonsCard);
 
   return (
     <S.SearchContainer>
-      <TextField
+      {/* <TextField
         id="demo-helper-text-misaligned-no-helper"
         label="Digite o nome do Pokemon..."
         //autoComplete={pokemonsName}
@@ -71,7 +71,7 @@ export const Search = () => {
       />
       <S.BtnFavorites type="button" onClick={() => navigate('/favorites')}>
         <Heart />
-      </S.BtnFavorites>
+      </S.BtnFavorites> */}
     </S.SearchContainer>
   );
 };

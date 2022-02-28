@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { PokemonType } from '../components/PokemonType/PokemonType';
 import { Pokemon, PokemonCard, PokemonBasicInfo } from '../types/types';
+import { getPokemonsIdByUrl } from '../utils/getPOkemonIdByUrl';
 
 export const api = axios.create({
   baseURL: `https://pokeapi.co/api/v2/`,
 });
 
-type PokemonCardByName = {
+type PokemonCardInfoById = {
   id: number;
   name: string;
   types: Array<{
@@ -29,17 +30,33 @@ export const getPokemonBasicInfo = async (limit: number) => {
 
 export const getPokemonCardData = async (limit: number) => {
   const pokemonBasicInfoList = await getPokemonBasicInfo(limit);
-  const pokemonsIdList = pokemonBasicInfoList.map(
-    (pokemonNameUrl) => pokemonNameUrl.url.slice(34, -1) //Getting the id of each pokemon out of the correspondent pokemon url
+  const pokemonsIdList = getPokemonsIdByUrl({ pokemonBasicInfoList });
+
+  const pendingPokemonCardInfo = pokemonsIdList.map((pokemonId) =>
+    getPokemonCardInfoById(pokemonId)
   );
-  console.log('pokemonsIdList', pokemonsIdList);
+  const pokemonCard = await Promise.all(pendingPokemonCardInfo);
+  return pokemonCard;
+};
+
+export const getPokemonCardInfoById = async (pokemonId: PokemonCard['id']) => {
+  const response = await api.get<PokemonCardInfoById>(
+    `pokemon-form/${pokemonId}`
+  );
+  const pokemonCardInfo = {
+    id: response.data.id,
+    name: response.data.name,
+    img: pokemonImgUrl(response.data.id),
+    type: response.data.types[0].type.name,
+  };
+  return pokemonCardInfo;
+};
+
+/* Can't fetch all pokemons by name, a few bad requests through this endPoint -> `pokemon-form/${pokemonName}` 
 
   const pendingPokemonCard = pokemonBasicInfoList.map((pokemonNameUrl) =>
     getPokemonCardByName(pokemonNameUrl.name)
   );
-  const pokemonCard = await Promise.all(pendingPokemonCard);
-  return pokemonCard;
-};
 
 export const getPokemonCardByName = async (
   pokemonName: PokemonCard['name']
@@ -60,4 +77,5 @@ export const getPokemon = async (pokemonName: Pokemon['name']) => {
   const response = await api.get<Pokemon>(`pokemon/${pokemonName}`);
 
   console.log(response);
-};
+}
+*/
