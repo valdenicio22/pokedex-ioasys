@@ -59,9 +59,42 @@ export const Main = styled.main`
   `}
 `;
 
+export const MainContent = styled.div`
+  width: ${({ theme }) => theme.containers.mobile};
+  margin: 0 auto;
+  padding-top: 6rem;
+`;
+
 export const TypesContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+
+  padding: 3rem 0;
+`;
+
+export const DetailsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(6.5rem, min-content)) auto;
+  grid-template-rows: min-content min-content;
+  gap: 3rem;
+`;
+
+export const DetailsContent = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  p {
+    font-size: 1.2rem;
+    display: block;
+    text-align: center;
+    margin-top: -0.5rem;
+    color: rgba(178, 178, 178, 1);
+  }
+  .abilities {
+    width: 100%;
+  }
 `;

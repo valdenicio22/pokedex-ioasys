@@ -3,14 +3,15 @@ import * as S from './Heart.styles';
 //Improve type using the theme
 type HeartProps = {
   color?: 'primary' | 'white';
+  size: number;
 };
 
-export const Heart = ({ color = 'primary' }: HeartProps) => {
+export const Heart = ({ size, color = 'primary' }: HeartProps) => {
   return (
     <S.Wrapper color={color}>
       <svg
-        width="20"
-        height="20"
+        width={size}
+        height={size}
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

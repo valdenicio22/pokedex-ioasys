@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { pokemonTypeColor } from '../../utils/pokemons';
 
 type Props = {
@@ -6,29 +6,39 @@ type Props = {
 };
 
 export const CardContainer = styled.div<Props>`
-  display: flex;
-  flex-flow: column nowrap;
+  ${({ theme, pokemonType }) => css`
+    display: grid;
+    grid-template-rows: 1.2rem auto 2.4rem;
 
-  border: 1px solid
-    ${({ theme, pokemonType }) => theme.pokemonTypeColor[pokemonType]};
+    border: 1px solid ${theme.pokemonTypeColor[pokemonType]}};
 
-  border-radius: ${({ theme }) => theme.border.radius};
+    border-radius: ${theme.border.radius.medium};
+
+    font-weight: ${theme.font.weight.semiBold};
+    font-size: ${theme.font.sizes.xsmall};
+    line-height: 1.6rem;
+  `}
 `;
 
 export const CardHeader = styled.header<Props>`
-  height: 1.2rem;
-  margin: 0.4rem 0.8rem 0rem;
-  font-size: ${({ theme }) => theme.font.sizes.xsmall};
-  color: ${({ theme, pokemonType }) => theme.pokemonTypeColor[pokemonType]};
+  ${({ theme, pokemonType }) => css`
+    padding: 0.6rem 0.8rem 0rem;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    color: ${theme.pokemonTypeColor[pokemonType]};
 
-  button {
-    border: none;
-    background-color: transparent;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      border: none;
+      background-color: transparent;
+    }
+
+    span {
+      font-size: ${theme.font.sizes.xxxsmall};
+    }
+  `}
 `;
 
 export const CardImg = styled.img`
@@ -38,12 +48,14 @@ export const CardImg = styled.img`
 `;
 
 export const CardFooter = styled.footer<Props>`
-  height: 2.4rem;
-  color: ${({ theme }) => theme.colors.white};
-  text-align: center;
-  background-color: ${({ theme, pokemonType }) =>
-    theme.pokemonTypeColor[pokemonType]};
-  border-radius: 0 0 0.7rem 0.7rem;
+  ${({ theme, pokemonType }) => css`
+    padding: 0.4rem 0.8rem 0rem;
+    text-align: center;
+    text-transform: capitalize;
+    color: ${theme.colors.white};
+    background-color: ${theme.pokemonTypeColor[pokemonType]};
+    border-radius: 0 0 0.7rem 0.7rem;
+  `}
 `;
 export const CardBtn = styled.button`
   border: none;

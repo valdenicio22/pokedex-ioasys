@@ -3,7 +3,7 @@ import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext';
 import { PokemonCard } from '../../types/types';
 import { Heart } from '../SvgComponents/Heart/Heart';
 import * as S from './PokeCard.styles';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { formatId } from '../../utils/formatPokemon';
 
 type PokeCardProps = {
@@ -13,8 +13,6 @@ type PokeCardProps = {
 
 export const PokeCard = ({ pokemonCard, isFavorite }: PokeCardProps) => {
   const { id, name, img, type } = pokemonCard;
-  // const navigate = useNavigate();
-  // const { pokemonName } = useParams();
 
   const { toggleFavoritePokemons } = useFavoritesPokemons();
 
@@ -22,16 +20,14 @@ export const PokeCard = ({ pokemonCard, isFavorite }: PokeCardProps) => {
     <S.CardContainer pokemonType={type}>
       <S.CardHeader pokemonType={type}>
         <button onClick={() => toggleFavoritePokemons(pokemonCard)}>
-          <Heart color={isFavorite ? 'primary' : 'white'} />
+          <Heart size={12} color={isFavorite ? 'primary' : 'white'} />
         </button>
         <span>{formatId(id)}</span>
       </S.CardHeader>
-      <Link to={`/pokemonDetails/${name}`}>
-        <S.CardBtn>
-          <S.CardImg src={img} alt={name} />
-          <S.CardFooter pokemonType={type}>{name}</S.CardFooter>
-        </S.CardBtn>
-      </Link>
+      <S.CardImg src={img} alt={name} />
+      {/* <Link to={`/pokemonDetails/${name}`}> */}
+      <S.CardFooter pokemonType={type}>{name}</S.CardFooter>
+      {/* </Link> */}
     </S.CardContainer>
   );
 };

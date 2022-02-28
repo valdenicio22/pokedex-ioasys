@@ -44,33 +44,35 @@ export const PokemonDetails = () => {
         <img src={sprites.other['official-artwork'].front_default} alt={name} />
       </S.ImgContainer>
       <S.Main>
-        <div className="types">
-          {types.map(({ type }) => (
-            <PokemonType typeName={type.name} />
-          ))}
-        </div>
-        <div className="Peso-Altura-abilidades">
-          <div>
-            <div>
+        <S.MainContent>
+          <S.TypesContainer>
+            {types.map(({ type }) => (
+              <PokemonType typeName={type.name} />
+            ))}
+          </S.TypesContainer>
+          <S.DetailsContainer>
+            <S.DetailsContent>
               <WeightIcon />
-              <p>{weight}</p>
-              <span>Weight</span>
-            </div>
-            <div>
+              <span>{weight}</span>
+              <p>Weight</p>
+            </S.DetailsContent>
+            <S.DetailsContent>
               <RulerIcon />
-              <p>{height}</p>
-              <span>Height</span>
-            </div>
-            <div>
+              <span>{height}</span>
+              <p>Height</p>
+            </S.DetailsContent>
+            <S.DetailsContent>
               {abilities.map((ability) => (
-                <p>{ability.ability.name}</p>
+                <span>{ability.ability.name}</span>
               ))}
-              <span>Abilities</span>
 
-              <div className="Base Stats"></div>
-            </div>
-          </div>
-        </div>
+              <div className="abilities">
+                <p>Habilidades</p>
+              </div>
+            </S.DetailsContent>
+          </S.DetailsContainer>
+          <div className="Base Stats"></div>
+        </S.MainContent>
       </S.Main>
 
       <Link to="/">
