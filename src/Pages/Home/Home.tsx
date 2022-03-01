@@ -119,7 +119,10 @@ export const Home = () => {
               : initialPokemonsCardList
           }
         />
-        <div style={{ height: '2rem' }} id="poke-card-sentinela" />
+        <div
+          style={{ backgroundColor: 'red', height: '2rem' }}
+          id="poke-card-sentinela"
+        />
       </S.HomeContainer>
     </>
   );
