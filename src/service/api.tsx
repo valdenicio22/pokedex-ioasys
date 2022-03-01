@@ -57,4 +57,9 @@ export const getPokemonDataByName = async (pokemonName: Pokemon['name']) => {
   return response.data;
 };
 
-/* Can't fetch all pokemons by name, a few bad requests through this endPoint -> `pokemon-form/${pokemonName}` */
+/* 
+  Reminders  
+- Only the needed data to build the card => `pokemon-form/${pokemonId}`
+- Can't fetch all pokemons by name, a few bad requests through this endPoint -> `pokemon-form/${pokemonName}`
+
+*/

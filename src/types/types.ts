@@ -52,5 +52,5 @@ export type FormattedPokemon = {
   img: string;
   abilities: string[];
   stats: Record<string, number>;
-  types: Array<keyof typeof pokemonTypeColor>; // ajeitar
+  types: Array<keyof typeof pokemonTypeColor>;
 };
