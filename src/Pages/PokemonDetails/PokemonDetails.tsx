@@ -14,6 +14,13 @@ import { formartPokemon } from '../../utils/formatPokemon';
 import theme from '../../styles/theme';
 //Material UI
 import LinearProgress from '@mui/material/LinearProgress';
+import { pokemonTypeColor } from '../../utils/pokemons';
+
+function addAlpha(color: string, opacity: number) {
+  // coerce values so ti is between 0 and 1.
+  var _opacity = Math.round(Math.min(Math.max(opacity || 1, 0), 1) * 255);
+  return color + _opacity.toString(16).toUpperCase();
+}
 
 export const PokemonDetails = () => {
   const navigate = useNavigate();
@@ -36,10 +43,10 @@ export const PokemonDetails = () => {
   const { id, img, abilities, height, name, stats, types, weight, about } =
     pokemon;
 
-  //if (types[0] === 'normal' && types.length > 1) types[1]);
+  const type = types[0] === 'normal' && types.length > 1 ? types[1] : types[0];
 
   return (
-    <S.Wrapper pokemonType={types[0]}>
+    <S.Wrapper pokemonType={type}>
       <S.HeaderContainer>
         <div>
           <Heart size={20} color={'white'} />
@@ -89,19 +96,26 @@ export const PokemonDetails = () => {
             Lorem ipsum dolor, sit amet consectetur adipisicing elit.
           </S.AboutContainer>
 
-          <S.StatsContainer>
+          <S.StatsContainer pokemonType={type}>
             <h2>Base Stats</h2>
             {Object.keys(stats).map((statKey) => {
               const valueStat = stats[statKey];
               return (
                 <div>
-                  <span>{statKey}</span>
+                  <span className="keyStats">{statKey}</span>
                   <span className="valueStats">{valueStat}</span>
                   <span className="progressBar">
                     <LinearProgress
                       value={valueStat}
                       variant="determinate"
-                      sx={{ width: '70%' }}
+                      sx={{
+                        height: '0.8rem',
+                        backgroundColor: addAlpha(pokemonTypeColor[type], 0.2),
+                        width: '100%',
+                        '& .MuiLinearProgress-bar': {
+                          backgroundColor: pokemonTypeColor[type],
+                        },
+                      }}
                     />
                   </span>
                 </div>

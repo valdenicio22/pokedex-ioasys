@@ -121,7 +121,7 @@ export const AboutContainer = styled.div`
   padding-top: 3rem;
 `;
 
-export const StatsContainer = styled.div`
+export const StatsContainer = styled.div<Props>`
   padding-bottom: 3rem;
 
   h2 {
@@ -129,14 +129,28 @@ export const StatsContainer = styled.div`
   }
 
   div {
-    .valueStats {
-      color: red;
-    }
+    ${({ theme, pokemonType }) => css`
+      display: flex;
+      align-items: center;
 
-    .progressBar {
-      width: 50%;
-      color: red;
-      background-color: red;
-    }
+      color: ${theme.pokemonTypeColor[pokemonType]};
+      font-size: ${theme.font.sizes.small};
+
+      .keyStats {
+        width: 6rem;
+        border-right: 1px solid black;
+        font-weight: ${theme.font.weight.semiBold};
+      }
+      .valueStats {
+        color: black;
+        padding-left: 1rem;
+      }
+
+      .progressBar {
+        width: 100%;
+
+        margin-left: 1.4rem;
+      }
+    `}
   }
 `;
