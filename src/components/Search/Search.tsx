@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import * as S from './Search.styles';
 
-import SearchIcon from '@mui/icons-material/Search';
+// import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 
 import { useNavigate } from 'react-router-dom';
@@ -33,8 +33,11 @@ export const Search = ({
           onFocus={handleInputSearchFocus}
           onChange={(e) => handleInputSearchChange(e)}
           value={inputSearchData}
+          sx={{
+            width: '100%',
+          }}
         />
-        <SearchIcon />
+        {/* <SearchIcon /> */}
       </S.Container>
       <S.BtnFavorites type="button" onClick={() => navigate('/favorites')}>
         <Heart size={30} color={'primary'} />

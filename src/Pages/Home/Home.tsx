@@ -38,21 +38,21 @@ export const Home = () => {
   const [inputSearchData, setInputSearchData] = useState('');
   const [debouncedInputSearchData, setDebouncedInputSearchData] = useState('');
 
-  const debouncedInputSearch = useDebounce(setDebouncedInputSearchData, 600);
+  const debouncedInputSearch = useDebounce(setDebouncedInputSearchData, 300);
 
   const isMobile = useMediaQuery({ query: '(max-width: 428px)' });
   const qtdInicialValue = isMobile ? 15 : 20;
-  const isLast = useRef();
+  const [pokemonQuantity, setPokemonQuantity] = useState(qtdInicialValue);
 
   useEffect(() => {
     try {
-      getPokemonCardData(qtdInicialValue).then((pokemonCard) =>
+      getPokemonCardData(pokemonQuantity).then((pokemonCard) =>
         setInitialPokemonsCardList(pokemonCard)
       );
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [pokemonQuantity]);
 
   const handleInputSearchFocus = () => {
     if (itWasFocusRef.current) return;
@@ -70,13 +70,17 @@ export const Home = () => {
   };
 
   useEffect(() => {
+    if (!debouncedInputSearchData) return;
+
     const filteredPokemonsByName = pokemonsBasicInfo.filter(
       (pokemonNameUrl) =>
         pokemonNameUrl.name
           .toLowerCase()
           .includes(debouncedInputSearchData.toLowerCase()) && pokemonNameUrl
     );
-    const filteredPokemonsId = getPokemonsIdByUrl(filteredPokemonsByName);
+    const filteredPokemonsId = getPokemonsIdByUrl(
+      filteredPokemonsByName.slice(0, 50)
+    );
 
     const pendingfilteredPokemonsCardData = filteredPokemonsId.map(
       (pokemonId) => getPokemonCardDataById(pokemonId)
@@ -87,12 +91,16 @@ export const Home = () => {
     );
   }, [debouncedInputSearchData]);
 
-  // useEffect(() => {
-  //   const intersectionObserver = new IntersectionObserver();
-  //   intersectionObserver.observe(document.querySelector(''));
-
-  //   return () => intersectionObserver.disconnect();
-  // });
+  useEffect(() => {
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        setPokemonQuantity((previousValue) => previousValue + 6);
+      }
+    });
+    const sentinela = document?.querySelector('#poke-card-sentinela')!;
+    intersectionObserver.observe(sentinela);
+    return () => intersectionObserver.disconnect();
+  }, []);
 
   return (
     <>
@@ -106,11 +114,12 @@ export const Home = () => {
         />
         <PokemonsList
           pokemonsListData={
-            filteredPokemonsCard.length !== 0
+            !!debouncedInputSearchData
               ? filteredPokemonsCard
               : initialPokemonsCardList
           }
         />
+        <div style={{ height: '2rem' }} id="poke-card-sentinela" />
       </S.HomeContainer>
     </>
   );
