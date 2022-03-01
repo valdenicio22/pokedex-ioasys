@@ -1,6 +1,6 @@
 # pokedex-ioasys
 
-[pokedex-ioasys]https://pokedex-three-bay.vercel.app/
+[pokedex-ioasys](https://pokedex-three-bay.vercel.app/)
 
 ## 💻 Projeto
 
