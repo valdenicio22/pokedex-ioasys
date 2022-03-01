@@ -6,7 +6,8 @@ export const HomeContainer = styled.div`
   margin: 0 auto;
   padding: 5rem 0rem;
 
-  @media (width > 42.8) {
-    max-width: 65rem;
+  @media (min-width: 42.85rem) {
+    width: ${({ theme }) => theme.containers.desktop};
+    max-width: 80rem;
   }
 `;

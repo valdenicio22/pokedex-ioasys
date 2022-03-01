@@ -1,4 +1,4 @@
-# pokedex-ioasys
+# Pokedex-ioasys
 
 [pokedex-ioasys](https://pokedex-three-bay.vercel.app/)
 

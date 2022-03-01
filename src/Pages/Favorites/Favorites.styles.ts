@@ -5,10 +5,12 @@ export const FavoritesContainer = styled.section`
     width: ${theme.containers.mobile};
     margin: 0 auto;
     padding: 5rem 0rem;
-  `}
 
-  .returnLink {
-    ${({ theme }) => css`
+    @media (min-width: 42.85rem) {
+      width: ${theme.containers.desktop};
+    }
+
+    .returnLink {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -21,8 +23,8 @@ export const FavoritesContainer = styled.section`
         font-size: ${theme.font.sizes.small};
         color: rgba(178, 178, 178, 0.9);
       }
-    `}
-  }
+    }
+  `}
 `;
 
 export const MyFavorites = styled.div`

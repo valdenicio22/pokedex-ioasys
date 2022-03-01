@@ -22,7 +22,7 @@ import {
 import { getPokemonsIdByUrl } from '../../utils/getPokemonsIdByUrl';
 
 export const Home = () => {
-  const MAX_POKEMONS_API = 1126;
+  const MAX_POKEMONS_API = 500; // 1126
 
   const itWasFocusRef = useRef(false);
 
@@ -42,6 +42,7 @@ export const Home = () => {
 
   const isMobile = useMediaQuery({ query: '(max-width: 428px)' });
   const qtdInicialValue = isMobile ? 15 : 20;
+  const qtdIntersectionObserver = isMobile ? 6 : 10;
   const [pokemonQuantity, setPokemonQuantity] = useState(qtdInicialValue);
 
   useEffect(() => {
@@ -94,7 +95,9 @@ export const Home = () => {
   useEffect(() => {
     const intersectionObserver = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) {
-        setPokemonQuantity((previousValue) => previousValue + 6);
+        setPokemonQuantity(
+          (previousValue) => previousValue + qtdIntersectionObserver
+        );
       }
     });
     const sentinela = document?.querySelector('#poke-card-sentinela')!;
@@ -119,10 +122,7 @@ export const Home = () => {
               : initialPokemonsCardList
           }
         />
-        <div
-          style={{ backgroundColor: 'red', height: '2rem' }}
-          id="poke-card-sentinela"
-        />
+        <div style={{ height: '2rem' }} id="poke-card-sentinela" />
       </S.HomeContainer>
     </>
   );
