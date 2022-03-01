@@ -9,7 +9,7 @@ type Props = {
 export const Wrapper = styled.div<Props>`
   width: 42.8rem;
   padding: 1.6rem 0.8rem;
-  height: 100%;
+  height: 100vh;
 
   background-color: ${({ theme, pokemonType }) =>
     theme.pokemonTypeColor[pokemonType]};
@@ -32,6 +32,7 @@ export const HeaderContainer = styled.header`
 
     h2 {
       font-size: ${theme.font.sizes.xlarge};
+      text-transform: capitalize;
     }
   `}
 `;
@@ -63,6 +64,14 @@ export const MainContent = styled.div`
   width: ${({ theme }) => theme.containers.mobile};
   margin: 0 auto;
   padding-top: 6rem;
+
+  .returnIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 3rem;
+  }
 `;
 
 export const TypesContainer = styled.div`
@@ -78,28 +87,56 @@ export const TypesContainer = styled.div`
 export const DetailsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, minmax(6.5rem, min-content)) auto;
-  grid-template-rows: min-content min-content;
-  gap: 3rem;
+  gap: 2.5rem;
 `;
 
 export const DetailsContent = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem;
 
-  span {
-    font-size: 1.2rem;
+  &.abilities {
+    text-transform: capitalize;
   }
 
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+
+    span {
+      font-size: 1.2rem;
+    }
+  }
   p {
     font-size: 1.2rem;
-    display: block;
     text-align: center;
-    margin-top: -0.5rem;
     color: rgba(178, 178, 178, 1);
   }
-  .abilities {
-    width: 100%;
+`;
+
+export const AboutContainer = styled.div`
+  padding-top: 3rem;
+`;
+
+export const StatsContainer = styled.div`
+  padding-bottom: 3rem;
+
+  h2 {
+    padding: 3rem 0 2rem;
+  }
+
+  div {
+    .valueStats {
+      color: red;
+    }
+
+    .progressBar {
+      width: 50%;
+      color: red;
+      background-color: red;
+    }
   }
 `;

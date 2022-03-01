@@ -11,6 +11,10 @@ import { RulerIcon } from '../../components/SvgComponents/RulerIcon/RulerIcon';
 import { ReturnArrowIcon } from '../../components/SvgComponents/ReturnArrowIcon/ReturnArrowIcon';
 import { formartPokemon } from '../../utils/formatPokemon';
 
+import theme from '../../styles/theme';
+//Material UI
+import LinearProgress from '@mui/material/LinearProgress';
+
 export const PokemonDetails = () => {
   const navigate = useNavigate();
   const { pokemonName } = useParams();
@@ -31,11 +35,14 @@ export const PokemonDetails = () => {
 
   const { id, img, abilities, height, name, stats, types, weight, about } =
     pokemon;
+
+  //if (types[0] === 'normal' && types.length > 1) types[1]);
+
   return (
     <S.Wrapper pokemonType={types[0]}>
       <S.HeaderContainer>
         <div>
-          <Heart size={20} color={'white'} /> //Passar prop
+          <Heart size={20} color={'white'} />
           <h2>{name}</h2>
         </div>
         <span>{id}</span>
@@ -52,32 +59,60 @@ export const PokemonDetails = () => {
           </S.TypesContainer>
           <S.DetailsContainer>
             <S.DetailsContent>
-              <WeightIcon />
-              <span>{weight}</span>
+              <div>
+                <WeightIcon />
+                <span>{weight}</span>
+              </div>
               <p>Weight</p>
             </S.DetailsContent>
             <S.DetailsContent>
-              <RulerIcon />
-              <span>{height}</span>
+              <div>
+                <RulerIcon />
+                <span>{height}</span>
+              </div>
               <p>Height</p>
             </S.DetailsContent>
-            <S.DetailsContent>
-              {abilities.map((ability) => (
-                <span>{ability}</span>
-              ))}
+            <S.DetailsContent className="abilities">
+              {abilities.map((ability, i) => {
+                console.log(i, abilities.length);
+                if (i + 1 === abilities.length) return <span>{ability}</span>;
+                return <span>{`${ability} /`}&nbsp;</span>;
+              })}
 
-              <div className="abilities">
+              <div>
                 <p>Habilidades</p>
               </div>
             </S.DetailsContent>
           </S.DetailsContainer>
           <div className="Base Stats"></div>
+          <S.AboutContainer>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          </S.AboutContainer>
+
+          <S.StatsContainer>
+            <h2>Base Stats</h2>
+            {Object.keys(stats).map((statKey) => {
+              const valueStat = stats[statKey];
+              return (
+                <div>
+                  <span>{statKey}</span>
+                  <span className="valueStats">{valueStat}</span>
+                  <span className="progressBar">
+                    <LinearProgress
+                      value={valueStat}
+                      variant="determinate"
+                      sx={{ width: '70%' }}
+                    />
+                  </span>
+                </div>
+              );
+            })}
+          </S.StatsContainer>
+          <Link to="/" className="returnIcon">
+            <ReturnArrowIcon />
+          </Link>
         </S.MainContent>
       </S.Main>
-
-      <Link to="/">
-        <ReturnArrowIcon />
-      </Link>
     </S.Wrapper>
   );
 };

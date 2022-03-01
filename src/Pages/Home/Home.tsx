@@ -1,5 +1,8 @@
 //Hooks
 import { useEffect, useRef, useState, ChangeEvent } from 'react';
+//Custom hooks
+import { useDebounce } from '../../hooks/useDebounce';
+import { useMediaQuery } from 'react-responsive';
 //Components
 import { TopHeader } from '../../components/TopHeader/TopHeader';
 import { Header } from '../../components/Header/Header';
@@ -15,7 +18,7 @@ import {
   getPokemonCardData,
   getPokemonCardDataById,
 } from '../../service/api';
-import { useDebounce } from '../../hooks/useDebounce';
+//Utils
 import { getPokemonsIdByUrl } from '../../utils/getPokemonsIdByUrl';
 
 export const Home = () => {
@@ -23,7 +26,9 @@ export const Home = () => {
 
   const itWasFocusRef = useRef(false);
 
-  const [pokemonsListData, setPokemonsListData] = useState<PokemonCard[]>([]);
+  const [initialPokemonsCardList, setInitialPokemonsCardList] = useState<
+    PokemonCard[]
+  >([]);
   const [pokemonsBasicInfo, setPokemonsBasicInfo] = useState<
     PokemonBasicInfo[]
   >([]);
@@ -35,10 +40,14 @@ export const Home = () => {
 
   const debouncedInputSearch = useDebounce(setDebouncedInputSearchData, 600);
 
+  const isMobile = useMediaQuery({ query: '(max-width: 428px)' });
+  const qtdInicialValue = isMobile ? 15 : 20;
+  const isLast = useRef();
+
   useEffect(() => {
     try {
-      getPokemonCardData(20).then((pokemonCard) =>
-        setPokemonsListData(pokemonCard)
+      getPokemonCardData(qtdInicialValue).then((pokemonCard) =>
+        setInitialPokemonsCardList(pokemonCard)
       );
     } catch (error) {
       console.log(error);
@@ -78,6 +87,13 @@ export const Home = () => {
     );
   }, [debouncedInputSearchData]);
 
+  // useEffect(() => {
+  //   const intersectionObserver = new IntersectionObserver();
+  //   intersectionObserver.observe(document.querySelector(''));
+
+  //   return () => intersectionObserver.disconnect();
+  // });
+
   return (
     <>
       <TopHeader />
@@ -92,7 +108,7 @@ export const Home = () => {
           pokemonsListData={
             filteredPokemonsCard.length !== 0
               ? filteredPokemonsCard
-              : pokemonsListData
+              : initialPokemonsCardList
           }
         />
       </S.HomeContainer>
