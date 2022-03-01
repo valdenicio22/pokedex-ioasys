@@ -4,7 +4,7 @@ export const pokemonTypeColor = {
   steel: '#B7B9D0',
   water: '#6493EB',
   grass: '#74CB48',
-  phychic: '#FB5584',
+  psychic: '#FB5584',
   ice: '#9AD6DF',
   dark: '#75574C',
   fairy: '#E69EAC',

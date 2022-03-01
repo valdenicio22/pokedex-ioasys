@@ -19,7 +19,13 @@ export const FavoritePokemonsContext =
 export const FavoritesPokemonsProvider = (
   props: FavoritePokemonsProviderProps
 ) => {
-  const [favoritesPokemons, setFavoritesPokemons] = useState<PokemonCard[]>([]);
+  const [favoritesPokemons, setFavoritesPokemons] = useState<PokemonCard[]>(
+    () => {
+      const savedPokemons = localStorage.getItem('favoritesPokemons');
+      if (!savedPokemons) return [];
+      return JSON.parse(savedPokemons) as PokemonCard[];
+    }
+  );
 
   const checkPokemonOnFavoriteList = (pokemonId: PokemonCard['id']) => {
     return favoritesPokemons.some((pokemon) => pokemon.id === pokemonId);
@@ -32,14 +38,22 @@ export const FavoritesPokemonsProvider = (
 
   const addPokemonToFavoriteList = (pokemon: PokemonCard) => {
     if (favoritesPokemons.length >= 12) return alert('Favorite list is full'); // Should pass false and the error msg
-
     const updatedFavoritePokemonList = [...favoritesPokemons, pokemon];
+
+    localStorage.setItem(
+      'favoritesPokemons',
+      JSON.stringify(updatedFavoritePokemonList)
+    );
     setFavoritesPokemons(updatedFavoritePokemonList);
   };
 
   const removePokemonFromFavoriteList = (pokemonId: PokemonCard['id']) => {
     const updatedFavoritePokemonList = favoritesPokemons.filter(
       (pokemon) => pokemon.id !== pokemonId
+    );
+    localStorage.setItem(
+      'favoritesPokemons',
+      JSON.stringify(updatedFavoritePokemonList)
     );
     setFavoritesPokemons(updatedFavoritePokemonList);
   };
