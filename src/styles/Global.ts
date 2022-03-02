@@ -15,7 +15,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     body {
       font-family: ${theme.font.family};
-      font-size: ${theme.font.sizes.small}; // 14px
+      font-size: ${theme.font.sizes.small}; // 14px = 1.4rem
       background-color: ${theme.colors.lightModeBg};
     }
   `}

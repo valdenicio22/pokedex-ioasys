@@ -12,10 +12,6 @@ export const Header = () => {
   return (
     <S.HeaderContainer>
       <Logo />
-      {/* <S.LogoContainer>
-        <img src={logoIoasys} alt="Logo Ioasys" />
-      </S.LogoContainer> */}
-
       <Switch checked={checked} onChange={() => setChecked(!checked)} />
     </S.HeaderContainer>
   );

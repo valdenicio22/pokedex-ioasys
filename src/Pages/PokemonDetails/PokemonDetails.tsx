@@ -15,15 +15,19 @@ import theme from '../../styles/theme';
 //Material UI
 import LinearProgress from '@mui/material/LinearProgress';
 import { pokemonTypeColor } from '../../utils/pokemons';
+import { useMediaQuery } from 'react-responsive';
+import { Header } from '../../components/Header/Header';
+import { TopHeader } from '../../components/TopHeader/TopHeader';
 
 function addAlpha(color: string, opacity: number) {
   // coerce values so ti is between 0 and 1.
-  var _opacity = Math.round(Math.min(Math.max(opacity || 1, 0), 1) * 255);
+  const _opacity = Math.round(Math.min(Math.max(opacity || 1, 0), 1) * 255);
   return color + _opacity.toString(16).toUpperCase();
 }
 
 export const PokemonDetails = () => {
   const navigate = useNavigate();
+  const isMobile = useMediaQuery({ query: '(max-width: 428.5px)' });
   const { pokemonName } = useParams();
   const [pokemon, setPokemon] = useState<FormattedPokemon>();
 
@@ -47,18 +51,44 @@ export const PokemonDetails = () => {
 
   return (
     <S.Wrapper pokemonType={type}>
-      <S.HeaderContainer>
-        <div>
-          <Heart size={20} color={'white'} />
-          <h2>{name}</h2>
-        </div>
-        <span>{id}</span>
-      </S.HeaderContainer>
-      <S.ImgContainer>
-        <img src={img} alt={name} />
-      </S.ImgContainer>
-      <S.Main>
+      {isMobile ? (
+        <>
+          <S.HeaderContainer>
+            <div>
+              <Heart size={20} color={'white'} />
+              <h2>{name}</h2>
+            </div>
+            <span>{id}</span>
+          </S.HeaderContainer>
+          <S.ImgContainer>
+            <img src={img} alt={name} />
+          </S.ImgContainer>
+        </>
+      ) : (
+        <>
+          <TopHeader pokemonType={type} />
+          <S.HeaderContainerDesktop>
+            <Header />
+          </S.HeaderContainerDesktop>
+        </>
+      )}
+
+      <S.Main pokemonType={type}>
+        {!isMobile && (
+          <div className="boxPokemon">
+            <img src={img} alt={name} />
+          </div>
+        )}
         <S.MainContent>
+          {!isMobile && (
+            <S.HeaderContainer pokemonType={type}>
+              <div>
+                <Heart size={20} color={'white'} />
+                <h2>{name}</h2>
+              </div>
+              <span>{id}</span>
+            </S.HeaderContainer>
+          )}
           <S.TypesContainer>
             {types.map((type) => (
               <PokemonType typeName={type} />

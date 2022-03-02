@@ -43,6 +43,7 @@ export const Home = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 428px)' });
   const qtdInicialValue = isMobile ? 15 : 20;
   const qtdIntersectionObserver = isMobile ? 6 : 10;
+
   const [pokemonQuantity, setPokemonQuantity] = useState(qtdInicialValue);
 
   useEffect(() => {

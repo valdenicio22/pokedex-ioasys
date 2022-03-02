@@ -6,7 +6,7 @@ export const HomeContainer = styled.div`
   margin: 0 auto;
   padding: 5rem 0rem;
 
-  @media (min-width: 42.85rem) {
+  @media (min-width: 428.5px) {
     width: ${({ theme }) => theme.containers.desktop};
     max-width: 80rem;
   }
