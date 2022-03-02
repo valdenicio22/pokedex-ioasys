@@ -22,7 +22,8 @@ export const formartPokemon = (pokemon: Pokemon) => {
   const formattedPokmeon: FormattedPokemon = {
     abilities: abilities.map(({ ability }) => ability.name),
     height: `${height / 10} m`,
-    id: formatId(id),
+    id,
+    formattedId: formatId(id),
     name: name,
     img: sprites.other['official-artwork'].front_default,
     stats: stats.reduce((acc, stat, index) => {

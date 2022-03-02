@@ -23,7 +23,7 @@ export const Wrapper = styled.div<Props>`
 
 export const HeaderContainerDesktop = styled.div`
   width: 83rem;
-  margin: 7rem auto;
+  margin: 4rem auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -50,6 +50,10 @@ export const HeaderContainer = styled.header<HeaderProps>`
     h2 {
       font-size: ${theme.font.sizes.xlarge};
       text-transform: capitalize;
+    }
+    button {
+      border: none;
+      background-color: transparent;
     }
   `}
   @media(min-width: 428.5px) {
@@ -91,7 +95,7 @@ export const Main = styled.main<MainProps>`
     box-shadow: none;
     border-radius: none;
     width: 100%;
-    height: 100%;
+    height: 60rem;
 
     margin-top: 0;
 
@@ -99,7 +103,7 @@ export const Main = styled.main<MainProps>`
 
     .boxPokemon {
       width: 43.5rem;
-      height: 100vh;
+      height: 100%;
       background-color: ${({ theme, pokemonType }) =>
         pokemonType
           ? theme.pokemonTypeColor[pokemonType]
@@ -126,6 +130,7 @@ export const MainContent = styled.div`
   }
   @media (min-width: 428.5px) {
     margin: 0 22rem;
+    height: 100%;
   }
 `;
 

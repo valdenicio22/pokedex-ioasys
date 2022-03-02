@@ -44,7 +44,8 @@ export type Pokemon = {
 };
 
 export type FormattedPokemon = {
-  id: string;
+  id: number;
+  formattedId: string;
   name: string;
   height: string;
   weight: string;

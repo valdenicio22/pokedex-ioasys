@@ -13,14 +13,15 @@ import { PokemonCard } from '../../types/types';
 
 type PokeCardProps = {
   pokemonCard: PokemonCard;
-  isFavorite: boolean;
 };
 
-export const PokeCard = ({ pokemonCard, isFavorite }: PokeCardProps) => {
+export const PokeCard = ({ pokemonCard }: PokeCardProps) => {
   let navigate = useNavigate();
   const { id, name, img, type } = pokemonCard;
 
-  const { toggleFavoritePokemons } = useFavoritesPokemons();
+  const { toggleFavoritePokemons, checkPokemonOnFavoriteList } =
+    useFavoritesPokemons();
+  const isFavorite = checkPokemonOnFavoriteList(pokemonCard.id);
 
   return (
     <S.CardContainer pokemonType={type}>

@@ -18,6 +18,7 @@ import { pokemonTypeColor } from '../../utils/pokemons';
 import { useMediaQuery } from 'react-responsive';
 import { Header } from '../../components/Header/Header';
 import { TopHeader } from '../../components/TopHeader/TopHeader';
+import { useFavoritesPokemons } from '../../context/FavoritesPokemonsContext';
 
 function addAlpha(color: string, opacity: number) {
   // coerce values so ti is between 0 and 1.
@@ -30,6 +31,8 @@ export const PokemonDetails = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 428.5px)' });
   const { pokemonName } = useParams();
   const [pokemon, setPokemon] = useState<FormattedPokemon>();
+  const { toggleFavoritePokemons, checkPokemonOnFavoriteList } =
+    useFavoritesPokemons();
 
   useEffect(() => {
     try {
@@ -42,12 +45,22 @@ export const PokemonDetails = () => {
     }
   }, []);
 
-  if (!pokemon) return <h1>Loadinng ...</h1>;
+  if (!pokemon) return <h1>Loading ...</h1>;
 
-  const { id, img, abilities, height, name, stats, types, weight, about } =
-    pokemon;
+  const {
+    id,
+    formattedId,
+    img,
+    abilities,
+    height,
+    name,
+    stats,
+    types,
+    weight,
+  } = pokemon;
 
   const type = types[0] === 'normal' && types.length > 1 ? types[1] : types[0];
+  const isFavorite = checkPokemonOnFavoriteList(pokemon.id);
 
   return (
     <S.Wrapper pokemonType={type}>
@@ -55,10 +68,21 @@ export const PokemonDetails = () => {
         <>
           <S.HeaderContainer>
             <div>
-              <Heart size={20} color={'white'} />
+              <button
+                onClick={() =>
+                  toggleFavoritePokemons({
+                    id,
+                    img,
+                    name,
+                    type: types[0],
+                  })
+                }
+              >
+                <Heart size={20} color={isFavorite ? 'primary' : 'white'} />
+              </button>
               <h2>{name}</h2>
             </div>
-            <span>{id}</span>
+            <span>{formattedId}</span>
           </S.HeaderContainer>
           <S.ImgContainer>
             <img src={img} alt={name} />
@@ -83,10 +107,21 @@ export const PokemonDetails = () => {
           {!isMobile && (
             <S.HeaderContainer pokemonType={type}>
               <div>
-                <Heart size={20} color={'white'} />
+                <button
+                  onClick={() =>
+                    toggleFavoritePokemons({
+                      id,
+                      img,
+                      name,
+                      type: types[0],
+                    })
+                  }
+                >
+                  <Heart size={20} color={isFavorite ? 'primary' : 'white'} />
+                </button>
                 <h2>{name}</h2>
               </div>
-              <span>{id}</span>
+              <span>{formattedId}</span>
             </S.HeaderContainer>
           )}
           <S.TypesContainer>
