@@ -28,7 +28,7 @@ export const Search = ({
       <S.Container>
         <TextField
           id="outlined-basic"
-          label="Outlined"
+          label="Buscar"
           variant="outlined"
           onFocus={handleInputSearchFocus}
           onChange={(e) => handleInputSearchChange(e)}
